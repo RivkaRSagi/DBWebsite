@@ -1,0 +1,37 @@
+h1{
+    font-size: 35pt;
+    padding: 30px;
+}
+h2{
+    font-size: 25pt;
+    padding: 20px;
+}
+body{
+    text-align: center;
+}
+
+.loginOptions{
+    width: fit-content;
+    margin: auto;
+    padding: 20px;
+}
+#loginButton{
+    margin: 25px;
+    background-color: rgb(4, 156, 156);
+    width: 200px;
+    height: 50px;
+    border: 1px solid black;
+    border-radius: 25px;
+    cursor: pointer;
+    float: left;
+    text-align: center;
+}
+#loginButton a{
+    color: whitesmoke;
+    font-size: 20pt;
+    text-decoration: none;
+    line-height: 50px;
+}
+#loginButton:hover{
+    background-color: rgb(3, 31, 125);
+}
