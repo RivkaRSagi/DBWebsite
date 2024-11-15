@@ -36,6 +36,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
         <title>Login</title>
     </head>
     <body>
+        <a href="login.html">go back</a>
         <div class="container">
             <div class="row"></div>
                     <h2>LOG IN</h2>

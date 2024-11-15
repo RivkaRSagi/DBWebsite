@@ -3,8 +3,8 @@
 //configure db
 $host = "localhost";
 $db = "finalproject";
-$user = "person"; //global permissions given to this user for this project, can be changed in phpmyadmin
-$pass = "pass";
+$user = "root"; //global permissions given to this user for this project, can be changed in phpmyadmin
+$pass = "";
 
 // create connection
 $conn = new mysqli($host, $user, $pass, $db);

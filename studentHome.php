@@ -28,7 +28,7 @@
                 <a href="studentHome.php">Home Page</a>
             </div>
             <div id="menuButton">
-                <a href="">Logout</a>
+                <a href="login.html">Logout</a>
             </div>
             <div id="menuButton">
                 <a href="">My Libraries</a>
@@ -41,7 +41,7 @@
 
 
     <div class="bodyDiv">
-        <p style="font-size:30px;">Welcome <?php $studentName ?> </p>
+        <p style="font-size:30px;">Welcome <?php echo $studentName ?> </p>
         <p style="font-size:30px;">this is the home page for students</p>
         <p>get student's university information from database:</p>
 
