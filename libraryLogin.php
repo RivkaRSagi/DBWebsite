@@ -1,3 +1,33 @@
+<?php
+include 'db.php';
+session_start();
+
+if($_SERVER['REQUEST_METHOD']==='POST'){
+    $library = $_POST['libraryname'];
+    $branch = $_POST['branch'];
+
+    //check if exists in db
+    $sql = "SELECT * FROM library WHERE LibraryName = ? AND BranchName = ?";
+    $statement = $conn->prepare($sql);
+    $statement->bind_param("ss", $library, $branch);
+    $statement->execute();       
+    $result = $statement->get_result();
+
+    if($result->num_rows ===1 ){
+        $_SESSION['libraryname'] = $library;
+        $_SESSION['branch'] = $branch;
+        header("Location: libraryHome.php");
+        exit;
+    }else{
+        echo "Invalid input";
+    }
+
+    $statement->close();
+    $conn->close();
+
+}
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -6,7 +36,6 @@
     </head>
     <body>
         <a href="login.html">go back</a>
-        <a href="libraryHome.html">go to libraryhome(for debugging purposes)</a>
         <div class="container">
             <div class="row"></div>
                     <h2>LOG IN</h2>
@@ -19,10 +48,7 @@
                             <label>Branch</label>
                             <input type="text" id="branch" name="branch" placeholder="Enter Branch" required/>
                         </div>
-                        <div class="password">
-                            <label>Password</label>
-                            <input type="password" name="password" is="password" placeholder="Enter Password" required/>
-                        </div>
+                    
                         <div class="submit">
                             <button type="submit">
                                 Log in

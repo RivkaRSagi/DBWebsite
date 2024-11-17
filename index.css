@@ -36,3 +36,11 @@
 .bodyDiv{
     margin-top: 150px;
 }
+
+input[type=submit]{
+    background-color: blueviolet;   
+    border: none;
+    color: white;
+    cursor: pointer;
+
+}
