@@ -1,13 +1,26 @@
 
 <?php
-    session_start();
     include 'db.php';
-        
-    $studentNum = $_SESSION['StudentID'];
-    $sql = "SELECT StudentName FROM Student WHERE StudentID =  $studentNum";
-    $statement = $conn->prepare($sql);
-    $statement->execute();       
-    $studentName = $statement->get_result();       
+    session_start();
+    
+    $studentID = $_SESSION['StudentID'];
+    $sql = "SELECT StudentName FROM Student WHERE StudentID = $studentID";
+    $retreival = $conn->query($sql);
+    // $statement->bind_param("s", $studentID);
+    $row = $retreival->fetch_assoc();
+    $studentName = $row["StudentName"];
+
+    $retreival->close();
+    $conn->close();
+
+    if($_SERVER['REQUEST_METHOD']==='POST'){
+        if($_POST['Logout']){
+            $SESSION = array();
+            header("Location: login.html");
+            exit;
+        }
+    }
+
 ?>
 
 
@@ -28,10 +41,12 @@
                 <a href="studentHome.php">Home Page</a>
             </div>
             <div id="menuButton">
-                <a href="login.html">Logout</a>
+                <a href="">My Libraries</a>
             </div>
             <div id="menuButton">
-                <a href="">My Libraries</a>
+                <form action="studentHome.php" method="post">
+                    <input type="submit" name="Logout" value="Logout"/>
+                </form>
             </div>
             
         </div>
