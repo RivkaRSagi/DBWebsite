@@ -2,7 +2,7 @@
 <?php
     include 'db.php';
     session_start();
-    
+     
     $studentID = $_SESSION['StudentID'];
     $sql = "SELECT StudentName FROM Student WHERE StudentID = $studentID";
     $retreival = $conn->query($sql);
@@ -38,10 +38,10 @@
     <div class="menuBar">
         <div class="menuButtons">
             <div id="menuButton">
-                <a href="studentHome.php">Home Page</a>
+                <a href="studentHome.php">My Information</a>
             </div>
             <div id="menuButton">
-                <a href="">My Libraries</a>
+                <a href="studentTextbooks.php">Textbooks</a>
             </div>
             <div id="menuButton">
                 <form action="studentHome.php" method="post">
@@ -56,9 +56,32 @@
 
 
     <div class="bodyDiv">
-        <p style="font-size:30px;">Welcome <?php echo $studentName ?> </p>
-        <p style="font-size:30px;">this is the home page for students</p>
-        <p>get student's university information from database:</p>
+        <h1 id="welcome">Welcome <?php echo $studentName ?> </h1>
+        <div class="majorDiv">
+            <h3>University Information</h3>
+            <div class="indent">
+                <p>Student Name: </p>
+                <p>University Name: </p>
+                <p>Student ID: </p>
+            </div>
+            
+        </div>
+
+        <div class="majorDiv">
+        <h3>My Library Memberships</h3>
+            <div class="minorDiv">
+                <table>
+                    <tr>
+                        <th>Library Name</th>
+                        <th>Card ID</th>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
 
     </div>
 

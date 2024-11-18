@@ -1,54 +1,54 @@
 <?php
-    include 'db.php';
-    session_start();
-    
-    if($_SERVER['REQUEST_METHOD']==='POST'){
-        if($_POST['Logout']){
-            $SESSION = array();
-            header("Location: login.html");
-            exit;
-        }
+include 'db.php';
+session_start();
+
+if($_SERVER['REQUEST_METHOD']==='POST'){
+    if($_POST['Logout']){
+        $SESSION = array();
+        header("Location: login.html");
+        exit;
     }
+}
 
 ?>
-
-
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="utf-8">
-    <title>Library Home</title>
+    <title>Retail Home</title>
     <link rel="stylesheet" href="index.css">
     
 </head>
 <body>
     <div class="menuBar">
         <div class="menuButtons">
+            <div id="menuButton">
+                <a href="retailHome.php">Sales</a>
+            </div>
 
             <div id="menuButton">
-                <form action="libraryHome.php" method="post">
+                <a href="retailStats.php">Stock and Stats</a>
+            </div>
+            <div id="menuButton">
+                <form action="retailHome.php" method="post">
                     <label for="Logout"></label>
                     <input type="submit" name="Logout" id="Logout" value="Logout"/>
                 </form>
             </div>
-
-            
         </div>
 
     </div>
-
     <div class="bodyDiv">
-        <h1 id="welcome">Welcome <?php echo $_SESSION['libraryname'] .", <br>". $_SESSION['branch']." location"?> </h1>
         <div class="majorDiv">
-            <h3>Textbooks</h3>
+            <h3>Item Stock</h3>
             <div class="minorDiv">
-                <table>
+            <table>
                     <tr>
-                        <th>Textbook Name</th>
+                        <th>Product Name</th>
                         <th>ISBN</th>
-                        <th>CopyID</th>
-                        <th>Status</th>
+                        <th>price</th>
+                        <th>Quantity</th>
                     </tr>
                     <tr>
                         <td>fetch from db here</td>
@@ -57,16 +57,15 @@
                         <td></td>
                     </tr>
                 </table>
-
             </div>
         </div>
-
         <div class="majorDiv">
             <h3>Statistics</h3>
             <div class="minorDiv">
-                
+
             </div>
         </div>
+
     </div>
 
 </body>

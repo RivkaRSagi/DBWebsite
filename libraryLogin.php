@@ -33,28 +33,33 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
     <head>
         <meta charset="UTF-8">
         <title>Login</title>
+        <link rel="stylesheet" href="login.css">
+
     </head>
     <body>
-        <a href="login.html">go back</a>
+        <a href="login.html" id="goBack">go back</a>
+        <br>
         <div class="container">
             <div class="row"></div>
-                    <h2>LOG IN</h2>
-                    <form action="" method="post">
-                        <div class="libraryname">
-                            <label>Library Name</label>
-                            <input type="text" id="libraryname" name="libraryname" placeholder="Enter Library Name" required/>
-                        </div>
-                        <div class="branch">
-                            <label>Branch</label>
-                            <input type="text" id="branch" name="branch" placeholder="Enter Branch" required/>
-                        </div>
-                    
-                        <div class="submit">
-                            <button type="submit">
-                                Log in
-                            </button>
-                        </div>
-                    </form>
+                <h1>LOG IN</h1>
+                <form action="" method="post">
+                    <div class="libraryname">
+                        <label>Library Name</label>
+                        <br>
+                        <input type="text" id="libraryname" name="libraryname" placeholder="Enter Library Name" required/>
+                    </div>
+                    <div class="branch">
+                        <label>Branch</label>
+                        <br>
+                        <input type="text" id="branch" name="branch" placeholder="Enter Branch" required/>
+                    </div>
+                
+                   <div class="submit">
+                        <button type="submit">
+                            Log in
+                        </button>
+                    </div>                   
+                </form>
             </div>
         </div>
     </body>

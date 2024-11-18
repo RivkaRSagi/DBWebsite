@@ -32,19 +32,24 @@
     <head>
         <meta charset="UTF-8">
         <title>Login</title>
+        <link rel="stylesheet" href="login.css">
+
     </head>
     <body>
-        <a href="login.html">go back</a>
+        <a href="login.html" id="goBack">go back</a>
+        <br>
         <div class="container">
             <div class="row"></div>
                 <h2>LOG IN</h2>
                 <form action="" method="post">
                     <div class="storename">
                         <label>Store Name</label>
+                        <br>
                         <input type="text" id="storename" name="storename" placeholder="Enter Store Name" required/>
                     </div>
                     <div class="storeaddress">
                         <label>Store Address</label>
+                        <br>
                         <input type="text" id="storeaddress" name="storeaddress" placeholder="Enter Store Address" required/>
                     </div>
                    

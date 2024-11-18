@@ -1,7 +1,7 @@
 <?php
 include 'db.php';
 session_start();
-
+ 
 if($_SERVER['REQUEST_METHOD']==='POST'){
     $uniname = $_POST['University'];
     $studentNum = $_POST['StudentID'];
@@ -34,19 +34,24 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
     <head>
         <meta charset="UTF-8">
         <title>Login</title>
+        <link rel="stylesheet" href="login.css">
+        
     </head>
     <body>
-        <a href="login.html">go back</a>
+        <a href="login.html" id="goBack">go back</a>
+        <br>
         <div class="container">
             <div class="row"></div>
                     <h2>LOG IN</h2>
                     <form action="studentLogin.php" method="post">
                         <div class="studentID">
                             <label for="University">University</label>
+                            <br>
                             <input type="text" id="University" name="University" placeholder="Enter University name" required/>
                         </div>
                         <div class="password">
                             <label for="StudentID">StudentID</label>
+                            <br>
                             <input type="password" name="StudentID" id="StudentID" placeholder="Enter Student ID" required/>
                         </div>
                         <div class="submit">

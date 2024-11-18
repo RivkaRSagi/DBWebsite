@@ -24,11 +24,11 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
     <div class="menuBar">
         <div class="menuButtons">
             <div id="menuButton">
-                <a href="retailHome.html">Home Page</a>
+                <a href="retailHome.php">Sales</a>
             </div>
 
             <div id="menuButton">
-                <a href="retailStats.html">Statistics</a>
+                <a href="retailStats.php">Stock and Stats</a>
             </div>
             <div id="menuButton">
                 <form action="retailHome.php" method="post">
@@ -40,8 +40,26 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
 
     </div>
     <div class="bodyDiv">
-        <p style="font-size:30px;">Welcome <?php echo $_SESSION['storename'] .", ". $_SESSION['storeaddress']." location"?> </p>
-        <p style="font-size:30px;">this is the home page for retail stores</p>
+        <h1 id="welcome">Welcome <?php echo $_SESSION['storename'] .", <br>". $_SESSION['storeaddress']." location"?> </h1>
+
+        <div class="majorDiv">
+            <p>Item Sales</p>
+            <div class="minorDiv">
+            <table>
+                    <tr>
+                        <th>Item Name</th>
+                        <th>Quantity</th>
+                        <th>SaleID</th>
+                    </tr>
+                    <tr>
+                        <td>fetch from db here</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
 
     </div>
 
