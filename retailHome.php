@@ -2,9 +2,11 @@
 include 'db.php';
 session_start();
 
+$storeName = $_SESSION['storename'];
+
 if($_SERVER['REQUEST_METHOD']==='POST'){
     if(isset($_POST['Logout'])){
-        $SESSION = array();
+        $_SESSION = array();
         header("Location: login.html");
         exit;
     }
