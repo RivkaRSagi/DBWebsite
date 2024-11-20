@@ -3,10 +3,31 @@ include 'db.php';
 session_start();
 
 if($_SERVER['REQUEST_METHOD']==='POST'){
-    if($_POST['Logout']){
+    if(isset($_POST['Logout'])){
         $SESSION = array();
         header("Location: login.html");
         exit;
+    }
+    else if(isset($_POST['addItem'])){ //currently not working properly
+        echo "adding an item";
+        $ISBN = $_POST['ISBN'];
+        $price = $_POST['price'];
+        $quantity = $_POST['quantity'];
+
+        //check for valid input
+        $sqlCreate = "INSERT INTO retailstock (ISBN, UnitPrice, Quantity, StoreName)
+        VALUES ($ISBN, $price, $quantity, $storeName);";
+        $statement = $conn->prepare($sqlCreate);
+        $statement ->bind_param("sifs", $ISBN, $price,$quantity, $storeName);
+        $statement->execute();
+
+
+    }
+    else if(isset($_POST['removeItem'])){
+        echo "removing an item";
+    }
+    else if(isset($_POST['updateItem'])){
+        echo "updating an item";
     }
 }
 
@@ -101,7 +122,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
                                         <input type="number" id="quantity" name="quantity" placeholder="0"/>
                                     </div>
                                     <div class="submit">
-                                        <button type="submit">
+                                        <button type="submit" value="addItem">
                                             confirm
                                         </button>
                                     </div>
@@ -129,7 +150,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
                                         <input type="text" id="ISBN" name="ISBN" placeholder="ISBN" required/>
                                     </div>
                                     
-                                    <div class="submit">
+                                    <div class="submit" value="removeItem">
                                         <button type="submit">
                                             confirm
                                         </button>
@@ -162,7 +183,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
                                         <label for="quantity">New Quantity:</label>
                                         <input type="number" id="quantity" name="quantity" placeholder="0"/>
                                     </div>
-                                    <div class="submit">
+                                    <div class="submit" value="updateItem">
                                         <button type="submit">
                                             confirm
                                         </button>
@@ -186,7 +207,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
     </div>
 
     <script>
-        //for opening the CRUD forms
+        //for opening and closing the CRUD forms
         function allowInput(inputType){
             document.getElementById(inputType).style.display = "block";
         }
