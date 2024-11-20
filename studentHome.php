@@ -6,12 +6,13 @@
     $studentID = $_SESSION['StudentID'];
     $sql = "SELECT StudentName FROM Student WHERE StudentID = $studentID";
     $retreival = $conn->query($sql);
-    // $statement->bind_param("s", $studentID);
+
     $row = $retreival->fetch_assoc();
     $studentName = $row["StudentName"];
 
-    $retreival->close();
-    $conn->close();
+
+
+    
 
     if($_SERVER['REQUEST_METHOD']==='POST'){
         if($_POST['Logout']){
@@ -60,9 +61,9 @@
         <div class="majorDiv">
             <h3>University Information</h3>
             <div class="indent">
-                <p>Student Name: </p>
-                <p>University Name: </p>
-                <p>Student ID: </p>
+                <p>Student Name: <?php echo $studentName ?></p>
+                <p>University Name: <?php echo $_SESSION['University'] ?></p>
+                <p>Student ID: <?php echo $_SESSION['StudentID'] ?></p>
             </div>
             
         </div>
@@ -75,10 +76,21 @@
                         <th>Library Name</th>
                         <th>Card ID</th>
                     </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                    <?php  
+                        $university = $_SESSION['University'];
+                        $sql = "SELECT LibraryName, CardID
+                         FROM librarymember  WHERE StudentID = $studentID AND University = '$university'";
+                        
+                        $retreival = $conn->query($sql);
+                        while($row = $retreival->fetch_assoc()){
+                            echo "<tr><td>".$row['LibraryName']."</td>
+                            <td>".$row['CardID'];
+                            
+                        }
+                       
+                        $retreival->close();
+                        $conn->close();
+                    ?>
                 </table>
             </div>
         </div>

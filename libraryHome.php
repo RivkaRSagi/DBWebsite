@@ -50,6 +50,22 @@
                         <th>CopyID</th>
                         <th>Status</th>
                     </tr>
+                    <?php  
+                        // $storeName = $_SESSION['storename'];
+                        $sql = "SELECT Title, re.ISBN, UnitPrice, Quantity
+                         FROM retailstock AS re JOIN textbook AS te ON re.ISBN=te.ISBN WHERE StoreName = 'indigo'";
+                        $retreival = $conn->query($sql);
+                        while($row = $retreival->fetch_assoc()){
+                            echo "<tr><td>".$row['Title']."</td>
+                            <td>".$row['ISBN']."</td>
+                            <td>".$row['UnitPrice']."</td>
+                            <td>".$row['Quantity'];
+                        }
+                       
+
+                        $retreival->close();
+                        $conn->close();
+                    ?>
                     <tr>
                         <td>fetch from db here</td>
                         <td></td>

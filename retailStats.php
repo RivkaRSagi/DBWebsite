@@ -40,23 +40,22 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
 
     </div>
     <div class="bodyDiv">
-        <div class="majorDiv">
-            <h3>Item Stock</h3>
+    <div class="majorDiv">
+            <h3>Item Sales</h3>
             <div class="minorDiv">
             <table>
                     <tr>
-                        <th>Product Name</th>
-                        <th>ISBN</th>
-                        <th>price</th>
+                        <th>Item Name</th>
                         <th>Quantity</th>
+                        <th>SaleID</th>
                     </tr>
                     <tr>
                         <td>fetch from db here</td>
                         <td></td>
                         <td></td>
-                        <td></td>
                     </tr>
                 </table>
+
             </div>
         </div>
         <div class="majorDiv">

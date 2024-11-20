@@ -44,7 +44,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
             <div class="row"></div>
                     <h2>LOG IN</h2>
                     <form action="studentLogin.php" method="post">
-                        <div class="studentID">
+                        <div class="University">
                             <label for="University">University</label>
                             <br>
                             <input type="text" id="University" name="University" placeholder="Enter University name" required/>

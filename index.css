@@ -98,3 +98,44 @@ input[type=submit]{
     text-transform: uppercase;
 }
 
+.CRUDoptions {
+    border: solid rgb(137, 137, 137) 1px;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 30px 5px;
+    display: none;
+}
+
+.CRUDoptions .ISBN, .price{
+    height: fit-content;
+    float: left;
+    padding-right: 20px;
+}
+.CRUDoptions .submit .cancel{
+    /* padding-top: 10px; */
+    height: fit-content;
+    float: right;
+    padding-left: 20px;
+}
+.allowInput{
+    margin-left:10px;
+}
+button{ 
+    padding: 0px 10px;
+    margin: auto;
+    background-color: rgb(0, 196, 214);
+    width: fit-content;
+    height: 20px;
+    border: 1px solid black;
+    border-radius: 25px;
+    cursor: pointer;
+    float: center;
+    text-align: center;
+    color: black;
+    font-size: 10pt;
+}
+button:hover{
+    background-color: rgb(3, 31, 125);
+    color: whitesmoke;
+}
+
