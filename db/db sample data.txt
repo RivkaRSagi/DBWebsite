@@ -25,7 +25,8 @@ VALUES
 ("elee2200u", "Electrical Engineering Fundementals", "Ontario Tech University"),
 ("phys1000u", "Introductory Physics", "Ontario Tech University"),
 ("psyc1000u", "Introductory Psychology", "Ontario Tech University"),
-("psych2000u", "Behavioural Psychology", "Ontario Tech University")
+("psyc2000u", "Behavioural Psychology", "Ontario Tech University"),
+("phys1000u", "Introductory Physics", "Trent University")
 ;
 
 INSERT INTO Student(StudentName, StudentID, University)
@@ -58,12 +59,12 @@ VALUES
 (5, 115.00, 32, "York University")
 ;
 
-INSERT INTO SchoolBooksUsed (ISBN, CopyID, UnitPrice, Availability, SchoolName)
+INSERT INTO SchoolBooksUsed (ISBN, CopyID, UnitPrice, AvailabilityStatus, SchoolName)
 VALUES
 (1, 1, 80.00, true, "Ontario Tech University"),
 (1, 2, 80.00, false, "Ontario Tech University"),
 (4, 1, 50.00, true, "Toronto Metropolitan University"),
-(5, 4, 65.00,, false, "University of Western Ontario"),
+(5, 4, 65.00, false, "University of Western Ontario"),
 (2, 5, 80.00, true, "York University"),
 (6, 6, 70.00, false, "Ontario Tech University")
 ;
@@ -98,7 +99,7 @@ VALUES
 (6,6, "Varun Suthakaran", "123 Sesame Street", "678-901-2345", "Oshawa Public Library", "Trent University")
 ;
 
-INSERT INTO librarybooks(ISBN, CopyID, BorrowStatus, LibraryName)
+INSERT INTO LibraryBooks(ISBN, CopyID, BorrowStatus, LibraryName)
 VALUES
 (1,9, false, "Toronto Public Library"),
 (2,2, true, "Oshawa Public Library"),
@@ -160,22 +161,23 @@ VALUES
 
 INSERT INTO ItemSales (StudentID, University, SaleID, StoreName, ISBN, Quantity)
 VALUES
-(1, "York University", 1, "Walmart, "1, 1),
+(1, "York University", 1, "Walmart",1, 1),
 (2, "Ontario Tech University", 2, "Indigo", 2, 2),
-(3, "Ontario Tech University", 3, "Bookmans", 3,3)
+(3, "Ontario Tech University", 3, "Bookmans", 3,3),
 (4, "Ontario Tech University", 4, "Amazon", 4,4),
 (5, "Trent University", 5, "Books Inc.", 5, 5),
 (6, "Trent University", 6, "GNU Books", 6,6)
 ;
 
-INSERT INTO CourseTextbook (SchoolName, CourseID, ISBN)
+INSERT INTO CourseTextbook (CourseID, SchoolName, ISBN)
 VALUES
 ("sofe3200u", "Ontario Tech University", 1),
 ("sofe3700u", "Ontario Tech University", 2),
 ("elee2200u", "Ontario Tech University", 3),
 ("phys1000u", "Ontario Tech University", 4),
 ("psyc1000u", "Ontario Tech University", 5),
-("psyc2000u", "Ontario Tech University",6)
+("pysc2000u", "Ontario Tech University", 6),
+("phys1000u", "Trent University", 4)
 ;
 
 INSERT INTO StudentCourses(StudentID, SchoolName, CourseID)
