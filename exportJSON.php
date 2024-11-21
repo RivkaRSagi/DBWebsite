@@ -8,6 +8,7 @@ $data = [
 
 //Export to JSON
 header('Content-Type: application/json');
+
 echo json_encode($data);
 
 //Save data as JSON file

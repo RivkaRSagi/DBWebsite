@@ -6,6 +6,12 @@ $data = [
     ['id' => 3, 'name' => 'Sam Brown', 'email' => 'sam.brown@example.com']
 ];
 
+//Export to CSV
+header('Content-Type: text/csv');
+
+//Download file name
+header('Content-Disposition: attachment; filename="data.csv"');
+
 //Path
 $file = 'data.csv';
 
