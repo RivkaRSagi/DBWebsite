@@ -22,10 +22,10 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
     <div class="menuBar">
         <div class="menuButtons">
             <div id="menuButton">
-                <a href="retailHome.php">Sales</a>
+                <a href="retailHome.php">Stock</a>
             </div>
             <div id="menuButton">
-                <a href="retailStats.php">Stock and Stats</a>
+                <a href="retailStats.php">Sales and Stats</a>
             </div>
             <div id="menuButton">
                 <form action="retailHome.php" method="post">
