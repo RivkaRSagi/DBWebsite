@@ -39,7 +39,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
     <div class="majorDiv">
             <h3>Item Sales</h3>
             <div class="minorDiv">
-            <table>
+                <table>
                     <tr>
                         <th>Item Name</th>
                         <th>Quantity</th>
@@ -56,7 +56,6 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
         <div class="majorDiv">
             <h3>Statistics</h3>
             <div class="minorDiv">
-
             </div>
         </div>
     </div>

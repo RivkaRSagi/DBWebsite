@@ -29,7 +29,6 @@
             </div>
         </div>
     </div>
-
     <div class="bodyDiv">
         <h1 id="welcome">Welcome <?php echo $_SESSION['libraryname'] .", <br>". $_SESSION['branch']." location"?> </h1>
         <div class="majorDiv">
@@ -65,7 +64,6 @@
                 </table>
             </div>
         </div>
-
         <div class="majorDiv">
             <h3>Statistics</h3>
             <div class="minorDiv"> 

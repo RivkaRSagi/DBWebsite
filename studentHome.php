@@ -1,4 +1,3 @@
-
 <?php
     include 'db.php';
     session_start();
@@ -51,9 +50,7 @@
                 <p>University Name: <?php echo $_SESSION['University'] ?></p>
                 <p>Student ID: <?php echo $_SESSION['StudentID'] ?></p>
             </div>
-            
         </div>
-
         <div class="majorDiv">
         <h3>My Library Memberships</h3>
             <div class="minorDiv">

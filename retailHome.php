@@ -45,7 +45,6 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
             <div id="menuButton">
                 <a href="retailHome.php">Stock</a>
             </div>
-
             <div id="menuButton">
                 <a href="retailStats.php">Sales and Stats</a>
             </div>
@@ -88,7 +87,6 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
                 </table>
             </div>
         </div>
-
         <div class="majorDiv">
             <h3>Update Stock</h3>
             <div class="minorDiv">
@@ -143,7 +141,6 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
                                         <label for="ISBN">ISBN:</label>
                                         <input type="text" id="ISBN" name="ISBN" placeholder="ISBN" required/>
                                     </div>
-                                    
                                     <div class="submit" value="removeItem">
                                         <button type="submit">
                                             confirm
