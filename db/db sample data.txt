@@ -1,0 +1,199 @@
+INSERT INTO Textbook(ISBN, Author, Publisher, Title, BookType)
+VALUES 
+(1, "Joe James", "McGrawHill", "Calculus Fundementals", "physical"),
+(2, "Desmond Newman", "Scholastic", "Introduction to Linear Algebra", "e-book"),
+(3, "John McDonald", "Pearson", "OOP Principles in Java", "paperback"),
+(4, "John Doe", "MacMillan LEarning", "C++", "physical"),
+(5, "Dora Matthews", "Sage Publications", "Classical Physics", "physical"),
+(6, "Elvia Bass", "Cengage Learning", "Historica Americana", "e-book")
+;
+
+INSERT INTO University (SchoolName, Bookstore)
+VALUES
+("Ontario Tech University", "Ontario Tech University"),
+("Toronto Metropolitan University", "Toronto Metropolitan University"),
+("York University", "York University"),
+("Trent University", "Trent University"),
+("University of Waterloo", "University of Waterloo"),
+("University of Western Ontario", "University of Western Ontario")
+;
+
+INSERT INTO Courses(CourseID, CourseName, SchoolName)
+VALUES
+("sofe3200u", "Systems Programming", "Ontario Tech University"),
+("sofe3700u", "Data Management Systems", "Ontario Tech University"),
+("elee2200u", "Electrical Engineering Fundementals", "Ontario Tech University"),
+("phys1000u", "Introductory Physics", "Ontario Tech University"),
+("psyc1000u", "Introductory Psychology", "Ontario Tech University"),
+("psych2000u", "Behavioural Psychology", "Ontario Tech University")
+;
+
+INSERT INTO Student(StudentName, StudentID, University)
+VALUES
+("Yasmin Khan", 1, "York University"),
+("Rivka Sagi", 2, "Ontario Tech University"),
+("Rhea Mathias", 3, "Ontario Tech University"),
+("Kevin Jacob", 4, "Ontario Tech University"),
+("Arzika Khan", 5, "Trent University"),
+("Varun Suthakaran", 6, "Trent University")
+;
+
+INSERT INTO SchoolBookstore (SchoolName)
+VALUES
+("Ontario Tech University"),
+("Toronto Metropolitan University"),
+("York University"),
+("Trent University"),
+("University of Waterloo"),
+("University of Western Ontario")
+;
+
+INSERT INTO SchoolBooksNew(ISBN, UnitPrice, Quantity, SchoolName)
+VALUES
+(1, 120.00, 12, "Ontario Tech University"),
+(4, 130.00, 10, "Ontario Tech University"),
+(2, 150.00, 6, "Trent University"),
+(3, 175.00, 25, "Trent University"),
+(6, 110.00, 30, "York University"),
+(5, 115.00, 32, "York University")
+;
+
+INSERT INTO SchoolBooksUsed (ISBN, CopyID, UnitPrice, Availability, SchoolName)
+VALUES
+(1, 1, 80.00, true, "Ontario Tech University"),
+(1, 2, 80.00, false, "Ontario Tech University"),
+(4, 1, 50.00, true, "Toronto Metropolitan University"),
+(5, 4, 65.00,, false, "University of Western Ontario"),
+(2, 5, 80.00, true, "York University"),
+(6, 6, 70.00, false, "Ontario Tech University")
+;
+
+INSERT INTO SchoolBookRentals(ISBN, CopyID, StudentID, DateRented, DateDue, SchoolName)
+VALUES
+(1, 1, 1, "2002-01-01", "2002-04-01", "York University"),
+(1, 23, 2, "2002-07-04", "2002-11-04", "York University"),
+(3, 6, 6, "2024-09-13", "2024-12-13", "York University"),
+(6, 3, 3, "2024-12-25", "2025-03-25", "York University"),
+(5, 2, 12, "2024-09-10", "2024-12-10", "York University"),
+(3, 1, 9, "2007-08-11", "2007-11-11", "York University")
+;
+
+INSERT INTO Library (LibraryName, BranchName, Address)
+VALUES
+("Toronto Public Library", "Morningside", "4280 Lawrence Avenue East"),
+("Toronto Public Library", "Cedarbrae", "1700 Eglinton Avenue East"),
+("Oshawa Public Library", "Centennial", "1275 Ritson Road"),
+("Toronto Public Library", "Malvern", "700 Neilson Road"),
+("Oshawa Public Library", "McLaughlin", "90 Athol Street West"),
+("Toronto Public Library", "Port Union", "5000 Lawrence Avenue East")
+;
+
+INSERT INTO LibraryMember (CardID, StudentID, Name, Address, PhoneNumber, LibraryName, University)
+VALUES
+(1, 1, "Yasmin Khan", "123 Avenue Road", "123-456-7890", "Toronto Public Library", "York University"),
+(2, 2, "Rivka Sagi", "5 Road Avenue", "234-567-8901", "Oshawa Public Library", "Ontario Tech University"),
+(3, 3, "Rhea Mathias", "75 Carl Hall Road", "345-678-9012", "Toronto Public Library", "Ontario Tech University"),
+(4, 4, "Kevin Jacob", "21 Jump Street", "456-789-0123", "Oshawa Public Library", "Ontario Tech University"),
+(5,5, "Arzika Khan", "-12 Yonge Street", "567-890-1234", "Toronto Public Library", "Trent University"),
+(6,6, "Varun Suthakaran", "123 Sesame Street", "678-901-2345", "Oshawa Public Library", "Trent University")
+;
+
+INSERT INTO librarybooks(ISBN, CopyID, BorrowStatus, LibraryName)
+VALUES
+(1,9, false, "Toronto Public Library"),
+(2,2, true, "Oshawa Public Library"),
+(3, 34, false, "Toronto Public Library"),
+(4,1, true, "Oshawa Public Library"),
+(5,2, true, "Toronto Public Library"),
+(6,1, true, "Oshawa Public Library")
+;
+
+INSERT INTO BookLoans(LoanID, ISBN, CopyID, CardID, DateBorrowed, DateDue, DateReturned)
+VALUES
+(1,1,1,1, "2000-01-01", "2000-01-04", "2000-01-04"),
+(2,2,4,1, "2024-02-03", "2024-02-06", "2024-02-06"),
+(3,3,7,2, "2017-07-12", "2018-07-04", "2018-07-04"),
+(4,4,2,6, "2020-01-12", "2021-01-04", "2021-01-04"),
+(5,5,10,4, "2016-12-25", "2017-04-25", "2017-04-25"),
+(6,6,7,3, "2024-09-08", "2024-09-12", "2024-09-12")
+;
+
+INSERT INTO Retail (StoreName, Address)
+VALUES
+("Walmart", "123 Avenue Road"),
+("Indigo", "5 Road Avenue"),
+("Bookmans", "75 Carl Hall Road"),
+("Amazon", "21 Jump Street"),
+("Books Inc.", "-12 Yonge Street"),
+("GNU Books", "123 Sesame Street")
+;
+
+INSERT INTO RetailStock (ISBN, unitPrice, Quantity, StoreName)
+VALUES
+(1, 100.00, 2, "Walmart"),
+(2, 120.00, 4, "Walmart"),
+(3, 95.00, 6, "Amazon"),
+(4, 150.00, 7, "Indigo"),
+(5, 140.00, 8, "Walmart"),
+(6, 90.00, 9, "Amazon")
+;
+
+INSERT INTO PrivateSeller (Username, Platform, Address)
+VALUES
+("seller1", "Kijiji", "123 Avenue Road"),
+("seller2", "Amazon", "5 Road Avenue"),
+("seller3", "Ebay", "75 Carl Hall Road"),
+("seller4", "Kijiji", "21 Jump Street"),
+("seller5", "Amazon", "-12 Yonge Street"),
+("seller6", "Ebay", "123 Sesame Street")
+;
+
+INSERT INTO PrivateSales (StudentID, University, SellerUsername, SellerPlatform, OfferPrice, ISBN, SaleID)
+VALUES
+(1, "York University", "seller1", "Kijiji", 100.00, 1, 1),
+(2, "Ontario Tech University", "seller2", "Amazon", 200.00, 2,2),
+(3, "Ontario Tech University", "seller3", "Ebay", 110.00, 3,3),
+(4, "Ontario Tech University", "seller4", "Kijiji", 87.00, 4,4),
+(5, "Trent University", "seller5", "Amazon", 95.00, 5,5),
+(6, "Trent University", "seller6", "Ebay", 75.00, 6,6)
+;
+
+INSERT INTO ItemSales (StudentID, University, SaleID, StoreName, ISBN, Quantity)
+VALUES
+(1, "York University", 1, "Walmart, "1, 1),
+(2, "Ontario Tech University", 2, "Indigo", 2, 2),
+(3, "Ontario Tech University", 3, "Bookmans", 3,3)
+(4, "Ontario Tech University", 4, "Amazon", 4,4),
+(5, "Trent University", 5, "Books Inc.", 5, 5),
+(6, "Trent University", 6, "GNU Books", 6,6)
+;
+
+INSERT INTO CourseTextbook (SchoolName, CourseID, ISBN)
+VALUES
+("sofe3200u", "Ontario Tech University", 1),
+("sofe3700u", "Ontario Tech University", 2),
+("elee2200u", "Ontario Tech University", 3),
+("phys1000u", "Ontario Tech University", 4),
+("psyc1000u", "Ontario Tech University", 5),
+("psyc2000u", "Ontario Tech University",6)
+;
+
+INSERT INTO StudentCourses(StudentID, SchoolName, CourseID)
+VALUES
+(1, "York University", "phys1000u"),
+(2, "Ontario Tech University", "sofe3200u"),
+(3, "Ontario Tech University", "elee2200u"),
+(4, "Ontario Tech University", "psyc1000u"),
+(5, "Trent University", "phys1000u"),
+(6, "Trent University", "phys1000u")
+;
+
+INSERT INTO StudentItemSales (StudentID, University, SaleID, ISBN)
+VALUES
+(1, "York University", 1, 1),
+(2, "Ontario Tech University", 2, 2),
+(3, "Ontario Tech University", 3, 3),
+(4, "Ontario Tech University", 4, 4),
+(5, "Trent University", 5, 5),
+(6, "Trent University", 6, 6)
+;
