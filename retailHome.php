@@ -4,27 +4,42 @@ session_start();
 
 $storeName = $_SESSION['storename'];
 
+
 if($_SERVER['REQUEST_METHOD']==='POST'){
     if(isset($_POST['Logout'])){
         $_SESSION = array();
         header("Location: login.html");
         exit;
     }
-    else if(isset($_POST['addItem'])){ //currently not working properly
+    else if(isset($_POST['addItem'])){ //STILL NEEDS ERROR HANDLING
         echo "adding an item";
         $ISBN = $_POST['ISBN'];
         $price = $_POST['price'];
         $quantity = $_POST['quantity'];
 
-        //check for valid input
         $sqlCreate = "INSERT INTO retailstock (ISBN, UnitPrice, Quantity, StoreName)
-        VALUES ($ISBN, $price, $quantity, $storeName);";
-        $statement = $conn->prepare($sqlCreate);
-        $statement ->bind_param("sifs", $ISBN, $price,$quantity, $storeName);
-        $statement->execute();
+        VALUES ($ISBN, $price, $quantity, '$storeName');";
+
+        $insertion = $conn->query($sqlCreate);
+        if($insertion === TRUE){
+            echo "New record created successfully";
+        }else{
+            echo "ERROR: ".$sqlCreate."<br>". $conn->error;
+        }
+
     }
-    else if(isset($_POST['removeItem'])){
+    else if(isset($_POST['removeItem'])){ //STILL NEEDS ERROR HANDLING
         echo "removing an item";
+        $ISBN = $_POST['ISBN'];
+
+        $sqlDelete = "DELETE FROM retailstock WHERE ISBN = $ISBN";
+
+        $deletion = $conn->query($sqlDelete);
+        if($deletion === TRUE){
+            echo "Record deleted successfully";
+        }else{
+            echo "ERROR: ".$sqlDelete."<br>". $conn->error;
+        }
     }
     else if(isset($_POST['updateItem'])){
         echo "updating an item";
@@ -102,24 +117,25 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
                             <div class="CRUDoptions" id="add">
                                 <p>Enter book details:</p>
                                 <form action="retailHome.php" method="post">
-                                    <div class="ISBN">
+                                    <div class="ISBN" id="optionDiv">
                                         <label for="ISBN">ISBN:</label>
                                         <input type="text" id="ISBN" name="ISBN" placeholder="ISBN" required/>
                                     </div>
-                                    <div class="price">
+                                    <div class="price" id="optionDiv">
                                         <label for="price">Unit Price:</label>
                                         <input type="number" id="price" name="price" placeholder="0.00" min="0" step="0.01" required/>
                                     </div>
-                                    <div class="quantity">
+                                    <div class="quantity" id="optionDiv">
                                         <label for="quantity">Quantity:</label>
                                         <input type="number" id="quantity" name="quantity" placeholder="0"/>
                                     </div>
                                     <div class="submit">
-                                        <button type="submit" value="addItem">
+                                        <input type="hidden" name="addItem" value="addItem">
+                                        <button type="submit">
                                             confirm
                                         </button>
                                     </div>
-                                    <div class="cancel">
+                                    <div class="cancel" >
                                         <button type="button" onclick="closeInput('add')">cancel</button>
                                     </div>
                                 </form>
@@ -137,11 +153,13 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
                             <div class="CRUDoptions" id="remove">
                                 <p>Enter book ISBN:</p>
                                 <form action="retailHome.php" method="post">
-                                    <div class="ISBN">
+                                    <div class="ISBN" id="optionDiv">
                                         <label for="ISBN">ISBN:</label>
                                         <input type="text" id="ISBN" name="ISBN" placeholder="ISBN" required/>
                                     </div>
-                                    <div class="submit" value="removeItem">
+                                    
+                                    <div class="submit" >
+                                        <input type="hidden" name="removeItem" value="removeItem">
                                         <button type="submit">
                                             confirm
                                         </button>
@@ -164,15 +182,16 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
                             <div class="CRUDoptions" id="update">
                                 <p>Enter item ISBN and the new quantity value:</p>
                                 <form action="retailHome.php" method="post">
-                                    <div class="ISBN">
+                                    <div class="ISBN" id="optionDiv">
                                         <label for="ISBN">ISBN:</label>
                                         <input type="text" id="ISBN" name="ISBN" placeholder="ISBN" required/>
                                     </div>
-                                    <div class="quantity">
+                                    <div class="quantity" id="optionDiv">
                                         <label for="quantity">New Quantity:</label>
                                         <input type="number" id="quantity" name="quantity" placeholder="0"/>
                                     </div>
-                                    <div class="submit" value="updateItem">
+                                    <div class="submit" >
+                                        <input type="hidden" name="updateItem" value="updateItem">
                                         <button type="submit">
                                             confirm
                                         </button>
