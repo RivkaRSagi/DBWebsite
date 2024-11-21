@@ -1,0 +1,364 @@
+use  sys;
+
+-- TABLES
+
+CREATE TABLE Student
+(
+  StudentName VARCHAR(255) NOT NULL,
+  StudentID VARCHAR(50) NOT NULL,
+  University VARCHAR(255) NOT NULL,
+  PRIMARY KEY (StudentID, University)
+  FOREIGN KEY (University) REFERENCES UNIVERSITY(SchoolName) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE University
+(
+  SchoolName VARCHAR(255) PRIMARY KEY,
+  Bookstore VARCHAR(255)
+);
+
+CREATE TABLE SchoolBookstore
+(
+  SchoolName VARCHAR(255) NOT NULL UNIQUE,
+  FOREIGN KEY (SchoolName) REFERENCES University(SchoolName) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE SchoolBooksNew
+(
+  ISBN VARCHAR(13) PRIMARY KEY,
+  UnitPrice DECIMAL(10, 2) NOT NULL,
+  Quantity INT NOT NULL,
+  SchoolName VARCHAR(255) NOT NULL,
+  FOREIGN KEY (SchoolName) REFERENCES SchoolBookstore(SchoolName) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE SchoolBooksUsed
+(
+  ISBN VARCHAR(13) NOT NULL,
+  CopyID INT NOT NULL,
+  UnitPrice DECIMAL(10, 2) NOT NULL,
+  AvailabilityStatus VARCHAR(20) NOT NULL,
+  PRIMARY KEY(ISBN, CopyID),
+  SchoolName VARCHAR(255) NOT NULL,
+  FOREIGN KEY (SchoolName) REFERENCES SchoolBookstore(SchoolName) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE SchoolBookRentals
+(
+  ISBN VARCHAR(13) NOT NULL,
+  CopyID INT NOT NULL,
+  StudentID VARCHAR(50) NOT NULL,
+  DateRented DATE NOT NULL,
+  DateDue DATE NOT NULL,
+  SchoolName VARCHAR(255) NOT NULL,
+  PRIMARY KEY(ISBN, CopyID, StudentID),
+  FOREIGN KEY (SchoolName) REFERENCES SchoolBookstore(SchoolName) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE Courses
+(
+  CourseName VARCHAR(255) NOT NULL,
+  CourseID VARCHAR(50) NOT NULL,
+  SchoolName VARCHAR(255) NOT NULL,
+  PRIMARY KEY (SchoolName, CourseID),
+  FOREIGN KEY (SchoolName) REFERENCES University(SchoolName) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE Textbook
+(
+  Title VARCHAR(255) NOT NULL,
+  ISBN VARCHAR(13) PRIMARY KEY,
+  Author VARCHAR(255),
+  Publisher VARCHAR(255),
+  BookType VARCHAR(100)
+);
+
+CREATE TABLE Library
+(
+  LibraryName VARCHAR(255) NOT NULL,
+  BranchName VARCHAR(255) NOT NULL,
+  Address VARCHAR(255),
+  PRIMARY KEY (LibraryName, BranchName)
+);
+
+CREATE TABLE LibraryBooks
+(
+  ISBN VARCHAR(13) NOT NULL,
+  CopyID INT NOT NULL,
+  BorrowStatus VARCHAR(50),
+  LibraryName VARCHAR(255) NOT NULL,
+  PRIMARY KEY(ISBN, CopyID),
+  FOREIGN KEY (LibraryName) REFERENCES Library(LibraryName) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE LibraryMember
+(
+  CardID VARCHAR(50) PRIMARY KEY,
+  Name VARCHAR(255) NOT NULL,
+  Address VARCHAR(255) NOT NULL,
+  PhoneNumber VARCHAR(20) NOT NULL,
+  LibraryName VARCHAR(255) NOT NULL,
+  StudentID VARCHAR(50),
+  University VARCHAR(255),
+  FOREIGN KEY (LibraryName) REFERENCES Library(LibraryName),
+  FOREIGN KEY (StudentID, University) REFERENCES Student (StudentID, University)
+);
+
+CREATE TABLE BookLoans
+(
+  LoanID VARCHAR(50) PRIMARY KEY,
+  CardID VARCHAR(50) NOT NULL,
+  ISBN VARCHAR(13) NOT NULL,
+  CopyID INT NOT NULL,
+  DateBorrowed DATE NOT NULL,
+  DateDue DATE NOT NULL,
+  DateReturned DATE,
+  FOREIGN KEY (CardID) REFERENCES LibraryMember(CardID)
+);
+
+CREATE TABLE Retail
+(
+  StoreName VARCHAR(255) PRIMARY KEY,
+  Address VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE RetailStock
+(
+  ISBN VARCHAR(13) PRIMARY KEY,
+  UnitPrice DECIMAL(10, 2) NOT NULL,
+  Quantity INT NOT NULL,
+  StoreName VARCHAR(255) NOT NULL,
+  FOREIGN KEY (StoreName) REFERENCES Retail(StoreName) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE PrivateSeller
+(
+  Username VARCHAR(50) NOT NULL,
+  Platform VARCHAR(100) NOT NULL,
+  Address VARCHAR(255) NOT NULL,
+  PRIMARY KEY (Username, Platform)
+);
+
+CREATE TABLE PrivateSales
+(
+  SellerUsername VARCHAR(50) NOT NULL,
+  SellerPlatform VARCHAR(100) NOT NULL,
+  StudentID VARCHAR(50),
+  University VARCHAR(255),
+  SaleID VARCHAR(50) PRIMARY KEY,
+  ISBN VARCHAR(13) NOT NULL,
+  OfferPrice DECIMAL(10, 2) NOT NULL,
+  FOREIGN KEY (SellerUsername, SellerPlatform) REFERENCES PrivateSeller (Username, Platform),
+  FOREIGN KEY (StudentID, University) REFERENCES Student (StudentID, University)
+);
+
+CREATE TABLE ItemSales
+(
+  SaleID VARCHAR(50) NOT NULL UNIQUE,
+  StoreName VARCHAR(255) NOT NULL,
+  StudentID VARCHAR(50),
+  University VARCHAR(255),
+  Quantity INT NOT NULL,
+  ISBN VARCHAR(13) NOT NULL
+  PRIMARY KEY (SaleID, ProductName),
+  FOREIGN KEY (StoreName) REFERENCES Retail (StoreName),
+  FOREIGN KEY (StudentID, University) REFERENCES Student(StudentID, University)
+);
+
+
+CREATE TABLE CourseTextbook
+(
+  SchoolName VARCHAR(255) NOT NULL,
+  CourseID VARCHAR(50) NOT NULL,
+  ISBN VARCHAR(13) NOT NULL,
+  PRIMARY KEY (SchoolName, CourseID, ISBN),
+  FOREIGN KEY (SchoolName, CourseID) REFERENCES Courses(SchoolName, CourseID),
+  FOREIGN KEY (ISBN) REFERENCES Textbook(ISBN)
+);
+
+CREATE TABLE StudentCourses
+(
+  StudentID VARCHAR(50) NOT NULL,
+  SchoolName VARCHAR(255) NOT NULL,
+  CourseID VARCHAR(50) NOT NULL,
+  PRIMARY KEY (StudentID, SchoolName, CourseID),
+  FOREIGN KEY (StudentID, SchoolName) REFERENCES Student(StudentID, SchoolName),
+  FOREIGN KEY (SchoolName, CourseID) REFERENCES Courses(SchoolName, CourseID)
+);
+ CREATE TABLE StudentItemSales
+(
+  StudentID VARCHAR(50) NOT NULL,
+  University VARCHAR(255) NOT NULL,
+  SaleID VARCHAR(50) NOT NULL UNIQUE,
+  ISBN VARCHAR(13) NOT NULL,
+  PRIMARY KEY (StudentID, University, SaleID, ProductName),
+  FOREIGN KEY (StudentID, University) REFERENCES Student(StudentID, University),
+  FOREIGN KEY (SaleID, ISBN) REFERENCES ItemSales(SaleID, ISBN)
+);
+
+
+-- VIEWS
+
+-- 1
+CREATE VIEW AllOptions AS
+select DISTINCT
+ sbu.copyID as usedCopyID,
+ sbu.unitPrice AS usedUnitPrice,
+ sbu.AvailabilityStatus, 
+sbu.SchoolName as usedSchoolName, 
+sbn.UnitPrice as newUnitPrice, 
+sbn.Quantity, 
+sbn.SchoolName as newSchoolName, 
+lb.CopyID as libCopyID, 
+lb.BorrowStatus, 
+lb.LibraryName
+from schoolbooksnew as sbn
+JOIN schoolbooksused as sbu
+JOIN librarybooks as lb
+where lb.ISBN = 1 and sbn.ISBN = 1 and sbu.ISBN = 1;
+
+-- 2
+CREATE VIEW StudentPrices as
+SELECT
+	t.ISBN,
+	bs.UnitPrice AS BookStorePrice,
+	rs.UnitPrice AS RetailPrice,
+	ps.OfferPrice AS PrivateSellerPrice
+FROM
+	SchoolBooksNew AS bs
+JOIN
+	Textbook AS t ON bs.ISBN = t.ISBN
+LEFT JOIN
+	RetailStock AS rs ON bs.ISBN = rs.ISBN
+LEFT JOIN
+	PrivateSales AS ps ON bs.ISBN = ps.ISBN
+WHERE
+	bs.UnitPrice < 200 and rs.UnitPrice < 200 AND ps.isbn < 200
+    and bs.ISBN = 2 and rs.isbn = 2 and ps.isbn = 2 and t.isbn = 2
+    ;
+-- 3
+CREATE VIEW textbooksRequired AS
+SELECT 
+sc.courseID, sc.schoolname, ct.isbn, textbook.title -- add in course nam e but only if it matches
+FROM 
+studentcourses AS sc, coursetextbook AS ct
+JOIN textbook ON textbook.isbn = ct.isbn
+WHERE 
+sc.schoolname = ct.schoolname and sc.courseid = ct.courseid
+;
+
+-- 4
+CREATE VIEW BuyingOptions as
+SELECT 
+r.StoreName, r.Address, rs.ISBN, rs.UnitPrice, rs.Quantity
+FROM 
+Retail AS r
+JOIN 
+RetailStock AS rs ON r.StoreName = rs.StoreName;
+
+-- 5
+CREATE VIEW `schoolbookstoreoptions` AS 
+SELECT 
+sbn.ISBN, sbn.UnitPrice,sbn.SchoolName, sbn.Quantity as InStock
+FROM 
+schoolbookstore as bs, schoolbooksNew as sbn
+WHERE 
+sbn.SchoolName = bs.SchoolName
+UNION all
+SELECT 
+sbu.ISBN, sbu.UnitPrice,sbu.SchoolName, sbu.AvailabilityStatus
+FROM 
+schoolbookstore as bs, schoolbooksUsed as sbu
+WHERE 
+sbu.SchoolName = bs.SchoolName
+;
+
+-- 6
+
+
+-- 7
+CREATE VIEW CheapestTextbooks AS 
+select ISBN,MIN(unitprice)
+from
+(
+select ISBN, unitprice from schoolbooksnew
+union
+select ISBN, unitprice from schoolbooksused
+union select ISBN, unitprice from retailstock
+) as t
+GROUP BY ISBN
+;
+
+-- 8
+create view libraryoptions as
+select lb.ISBN, lb.copyid, lb.borrowstatus, lb.libraryname
+from librarybooks as lb
+join librarymember as lm on lm.libraryname = lb.libraryname
+where lm.studentid = 1
+;
+
+-- 9
+CREATE VIEW PurchaseOptions AS
+SELECT 
+textbook.title, r.storename AS sourceOfSale, r.unitprice AS Price
+FROM 
+textbook, retailstock AS r
+WHERE 
+r.quantity > 0 AND textbook.isbn = r.isbn
+UNION
+SELECT 
+textbook.title, s.sellerplatform AS sourceOfSale, s.offerprice AS Price
+FROM
+textbook, privatesales AS s
+WHERE 
+s.studentid IS NULL AND textbook.isbn = s.isbn
+UNION
+SELECT 
+textbook.title, scn.schoolname AS sourceOfSale, scn.unitprice AS Price
+FROM 
+textbook, schoolbooksnew AS scn
+WHERE 
+scn.quantity>0 AND textbook.isbn = scn.isbn
+UNION
+SELECT 
+textbook.title, scu.schoolname AS sourceOfSale, scu.unitprice AS Price
+FROM 
+textbook, schoolbooksused AS scu
+WHERE 
+scu.availabilitystatus = "available" AND textbook.isbn = scu.isbn;
+
+
+-- 10
+CREATE VIEW AvailableRentals AS
+SELECT 
+sb.ISBN, t.title, sb.unitPrice, sb.AvailabilityStatus
+FROM 
+SchoolBooksUsed sb
+LEFT JOIN 
+textbook as t on t.isbn = sb.isbn
+where sb.availabilitystatus = 0
+
+UNION ALL
+
+SELECT 
+lb.ISBN, t.title, null, lb.borrowstatus
+FROM 
+LibraryBooks lb
+LEFT JOIN 
+textbook as t on t.isbn = lb.isbn
+WHERE  lb.borrowstatus = 0
+;
+
+-- STATISTICS
+
+-- LIBRARY (number of borrows for each textbook)
+CREATE VIEW BorrowDemand AS
+SELECT COUNT(*), ISBN
+FROM bookloans
+GROUP BY ISBN;
+
+-- RETAIL (number of sales of each textbook)
+CREATE VIEW RetailDemand AS
+SELECT count(*), isbn
+FROM itemsales
+GROUP BY isbn;

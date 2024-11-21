@@ -51,7 +51,6 @@
                         <br>
                         <input type="text" id="storeaddress" name="storeaddress" placeholder="Enter Store Address" required/>
                     </div>
-                   
                     <div class="submit">
                         <button type="submit">
                             Log in

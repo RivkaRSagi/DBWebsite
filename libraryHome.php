@@ -29,7 +29,6 @@
             </div>
         </div>
     </div>
-
     <div class="bodyDiv">
         <h1 id="welcome">Welcome <?php echo $_SESSION['libraryname'] .", <br>". $_SESSION['branch']." location"?> </h1>
         <div class="majorDiv">
@@ -43,29 +42,22 @@
                         <th>Status</th>
                     </tr>
                     <?php  
-                        // $storeName = $_SESSION['storename'];
-                        $sql = "SELECT Title, re.ISBN, UnitPrice, Quantity
-                         FROM retailstock AS re JOIN textbook AS te ON re.ISBN=te.ISBN WHERE StoreName = 'indigo'";
+                        $name = $_SESSION['libraryname'];
+                        $sql = "SELECT Title, L.ISBN, CopyID, BorrowStatus
+                         FROM librarybooks AS L JOIN textbook AS T ON L.ISBN=T.ISBN WHERE LibraryName = '$name'";
                         $retreival = $conn->query($sql);
                         while($row = $retreival->fetch_assoc()){
                             echo "<tr><td>".$row['Title']."</td>
                             <td>".$row['ISBN']."</td>
-                            <td>".$row['UnitPrice']."</td>
-                            <td>".$row['Quantity'];
+                            <td>".$row['CopyID']."</td>
+                            <td>".$row['BorrowStatus'];
                         }
                         $retreival->close();
                         $conn->close();
                     ?>
-                    <tr>
-                        <td>fetch from db here</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
                 </table>
             </div>
         </div>
-
         <div class="majorDiv">
             <h3>Google Books Search</h3>
             <div class="search-bar">

@@ -24,7 +24,6 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
 
     $statement->close();
     $conn->close();
-
 }
 ?>
 
@@ -52,7 +51,6 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
                         <br>
                         <input type="text" id="branch" name="branch" placeholder="Enter Branch" required/>
                     </div>
-                
                    <div class="submit">
                         <button type="submit">
                             Log in

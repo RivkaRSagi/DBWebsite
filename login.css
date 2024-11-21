@@ -3,10 +3,12 @@ h1{
     padding: 35px;
     color: black;
 }
+
 h2{
     font-size: 25pt;
     padding: 20px;
 }
+
 body{
     text-align: center;
     background-color: rgb(231, 231, 231);
@@ -24,6 +26,7 @@ div{
     margin: auto;
     padding: 20px;
 }
+
 #loginButton{
     margin: 25px;
     background-color: rgb(0, 196, 214);
@@ -35,12 +38,14 @@ div{
     float: left;
     text-align: center;
 }
+
 #loginButton a{
     color: whitesmoke;
     font-size: 20pt;
     text-decoration: none;
     line-height: 50px;
 }
+
 #loginButton:hover{
     background-color: rgb(3, 31, 125);
 }
@@ -52,6 +57,7 @@ input[type=text], input[type=password]{
     box-sizing: border-box;
     font-size: 12pt;
 }
+
 button{ 
     margin: auto;
     background-color: rgb(0, 196, 214);
@@ -65,9 +71,9 @@ button{
     color: whitesmoke;
     font-size: 20pt;
 }
+
 button:hover{
     background-color: rgb(3, 31, 125);
-
 }
 
 #goBack{

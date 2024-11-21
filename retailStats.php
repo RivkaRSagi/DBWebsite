@@ -22,10 +22,10 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
     <div class="menuBar">
         <div class="menuButtons">
             <div id="menuButton">
-                <a href="retailHome.php">Sales</a>
+                <a href="retailHome.php">Stock</a>
             </div>
             <div id="menuButton">
-                <a href="retailStats.php">Stock and Stats</a>
+                <a href="retailStats.php">Sales and Stats</a>
             </div>
             <div id="menuButton">
                 <form action="retailHome.php" method="post">
@@ -39,7 +39,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
     <div class="majorDiv">
             <h3>Item Sales</h3>
             <div class="minorDiv">
-            <table>
+                <table>
                     <tr>
                         <th>Item Name</th>
                         <th>Quantity</th>
@@ -56,7 +56,6 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
         <div class="majorDiv">
             <h3>Statistics</h3>
             <div class="minorDiv">
-
             </div>
         </div>
     </div>

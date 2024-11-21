@@ -24,10 +24,8 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
 
     $statement->close();
     $conn->close();
-
 }
 ?>
-
 
 <!DOCTYPE html>
 <html>
@@ -41,24 +39,24 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
         <br>
         <div class="container">
             <div class="row"></div>
-                    <h2>LOG IN</h2>
-                    <form action="studentLogin.php" method="post">
-                        <div class="University">
-                            <label for="University">University</label>
-                            <br>
-                            <input type="text" id="University" name="University" placeholder="Enter University name" required/>
-                        </div>
-                        <div class="password">
-                            <label for="StudentID">StudentID</label>
-                            <br>
-                            <input type="password" name="StudentID" id="StudentID" placeholder="Enter Student ID" required/>
-                        </div>
-                        <div class="submit">
-                            <button type="submit">
-                                Log in
-                            </button>
-                        </div>
-                    </form>
+                <h2>LOG IN</h2>
+                <form action="studentLogin.php" method="post">
+                    <div class="University">
+                        <label for="University">University</label>
+                        <br>
+                        <input type="text" id="University" name="University" placeholder="Enter University name" required/>
+                    </div>
+                    <div class="password">
+                        <label for="StudentID">StudentID</label>
+                        <br>
+                        <input type="password" name="StudentID" id="StudentID" placeholder="Enter Student ID" required/>
+                    </div>
+                    <div class="submit">
+                        <button type="submit">
+                            Log in
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </body>
