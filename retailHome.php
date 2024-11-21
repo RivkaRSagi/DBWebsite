@@ -43,6 +43,17 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
     }
     else if(isset($_POST['updateItem'])){
         echo "updating an item";
+        $ISBN = $_POST['ISBN'];
+        $quantity = $_POST['quantity'];
+
+        $sqlUpdate = "UPDATE retailstock SET Quantity = '$quantity' WHERE ISBN = '$ISBN'";
+
+        $update = $conn->query($sqlUpdate);
+        if($update === TRUE){
+            echo "Record updated successfully";
+        }else{
+            echo "ERROR: ".$sqlUpdate."<br>". $conn->error;
+        }
     }
 }
 
