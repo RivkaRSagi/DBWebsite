@@ -6,8 +6,6 @@
     <meta charset="utf-8">
     <title>Student Home</title>
     <link rel="stylesheet" href="index.css">
-
-    
 </head>
 <body>
     <div class="menuBar">
@@ -23,25 +21,14 @@
                     <input type="submit" name="Logout" value="Logout"/>
                 </form>
             </div>
-            
         </div>
-
     </div>
-
-
-
     <div class="bodyDiv">
-        
         <div class="majorDiv">
             <h3>Textbooks</h3>
             <div class="minorDiv">
-                
             </div>
         </div>
-        
-
     </div>
-
-
 </body>
 </html>

@@ -22,8 +22,6 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
         $statement = $conn->prepare($sqlCreate);
         $statement ->bind_param("sifs", $ISBN, $price,$quantity, $storeName);
         $statement->execute();
-
-
     }
     else if(isset($_POST['removeItem'])){
         echo "removing an item";
@@ -36,12 +34,10 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
 ?>
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <title>Retail Home</title>
     <link rel="stylesheet" href="index.css">
-    
 </head>
 <body>
     <div class="menuBar">
@@ -60,11 +56,9 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
                 </form>
             </div>
         </div>
-
     </div>
     <div class="bodyDiv">
         <h1 id="welcome">Welcome <?php echo $_SESSION['storename'] .", <br>". $_SESSION['storeaddress']." location"?> </h1>
-
         <div class="majorDiv">
             <h3>Item Stock</h3>
             <div class="minorDiv">
@@ -86,7 +80,6 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
                             <td>".$row['ISBN']."</td>
                             <td>".$row['UnitPrice']."</td>
                             <td>".$row['Quantity'];
-                            
                         }
                        
                         $retreival->close();
@@ -132,7 +125,6 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
                                         <button type="button" onclick="closeInput('add')">cancel</button>
                                     </div>
                                 </form>
-
                             </div>
                         </td>
                     </tr>
@@ -161,9 +153,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
                                         <button type="button" onclick="closeInput('remove')">cancel</button>
                                     </div>
                                 </form>
-
                             </div>
-
                         </td>  
                     </tr>
                     <tr>
@@ -194,18 +184,12 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
                                         <button type="button" onclick="closeInput('update')">cancel</button>
                                     </div>
                                 </form>
-
                             </div>
-
                         </td>  
                     </tr>
                 </table>
-                
-
             </div>
         </div>
-
-
     </div>
 
     <script>

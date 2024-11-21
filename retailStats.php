@@ -13,12 +13,10 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
 ?>
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <title>Retail Home</title>
     <link rel="stylesheet" href="index.css">
-    
 </head>
 <body>
     <div class="menuBar">
@@ -26,7 +24,6 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
             <div id="menuButton">
                 <a href="retailHome.php">Sales</a>
             </div>
-
             <div id="menuButton">
                 <a href="retailStats.php">Stock and Stats</a>
             </div>
@@ -37,7 +34,6 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
                 </form>
             </div>
         </div>
-
     </div>
     <div class="bodyDiv">
     <div class="majorDiv">
@@ -55,7 +51,6 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
                         <td></td>
                     </tr>
                 </table>
-
             </div>
         </div>
         <div class="majorDiv">
@@ -64,8 +59,6 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
 
             </div>
         </div>
-
     </div>
-
 </body>
 </html>

@@ -1,18 +1,17 @@
 
 <?php
-//configure db
+//Configure Database
 $host = "localhost";
 $db = "finalproject";
 $user = "root"; //global permissions given to this user for this project, can be changed in phpmyadmin
 $pass = "";
 
-// create connection
+//Create connection
 $conn = new mysqli($host, $user, $pass, $db);
 
-// check connection
+//Check Connection
 if($conn->connect_error){
     // die("Connection failed: " . $conn->connect_error);
     echo "connection failed";
 }
-
 ?>

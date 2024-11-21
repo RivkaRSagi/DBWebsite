@@ -34,7 +34,6 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
         <meta charset="UTF-8">
         <title>Login</title>
         <link rel="stylesheet" href="login.css">
-
     </head>
     <body>
         <a href="login.html" id="goBack">go back</a>

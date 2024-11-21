@@ -9,33 +9,25 @@
             exit;
         }
     }
-
 ?>
-
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <title>Library Home</title>
     <link rel="stylesheet" href="index.css">
-    
 </head>
 <body>
     <div class="menuBar">
         <div class="menuButtons">
-
             <div id="menuButton">
                 <form action="libraryHome.php" method="post">
                     <label for="Logout"></label>
                     <input type="submit" name="Logout" id="Logout" value="Logout"/>
                 </form>
             </div>
-
-            
         </div>
-
     </div>
 
     <div class="bodyDiv">
@@ -61,8 +53,6 @@
                             <td>".$row['UnitPrice']."</td>
                             <td>".$row['Quantity'];
                         }
-                       
-
                         $retreival->close();
                         $conn->close();
                     ?>
@@ -73,17 +63,14 @@
                         <td></td>
                     </tr>
                 </table>
-
             </div>
         </div>
 
         <div class="majorDiv">
             <h3>Statistics</h3>
-            <div class="minorDiv">
-                
+            <div class="minorDiv"> 
             </div>
         </div>
     </div>
-
 </body>
 </html>

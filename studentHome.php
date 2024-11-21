@@ -10,10 +10,6 @@
     $row = $retreival->fetch_assoc();
     $studentName = $row["StudentName"];
 
-
-
-    
-
     if($_SERVER['REQUEST_METHOD']==='POST'){
         if($_POST['Logout']){
             $_SESSION = array();
@@ -21,19 +17,14 @@
             exit;
         }
     }
-
 ?>
-
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <title>Student Home</title>
     <link rel="stylesheet" href="index.css">
-
-    
 </head>
 <body>
     <div class="menuBar">
@@ -49,13 +40,8 @@
                     <input type="submit" name="Logout" value="Logout"/>
                 </form>
             </div>
-            
         </div>
-
     </div>
-
-
-
     <div class="bodyDiv">
         <h1 id="welcome">Welcome <?php echo $studentName ?> </h1>
         <div class="majorDiv">
@@ -94,9 +80,6 @@
                 </table>
             </div>
         </div>
-
     </div>
-
-
 </body>
 </html>
