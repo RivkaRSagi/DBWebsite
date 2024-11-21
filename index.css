@@ -147,3 +147,51 @@ button:hover{
     background-color: rgb(3, 31, 125);
     color: whitesmoke;
 }
+.majorDiv .search-bar #query{
+    padding: 10px;
+    font-size: 16px;
+    width: 300px;
+}
+.majorDiv .search-bar #searchbutton{
+    padding: 15px 30px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: rgb(0, 196, 214);
+    color: white;
+    border: none;
+    margin-left: 10px;
+    text-align: center;
+    height: fit-content;
+}
+.majorDiv .book-results{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+.majorDiv .book-card {
+    width: 200px;
+    margin: 20px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.majorDiv .book-card img {
+    width: 150px;
+    height: 200px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.majorDiv .book-card h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.majorDiv .book-card p {
+    font-size: 14px;
+    color: #555;
+}

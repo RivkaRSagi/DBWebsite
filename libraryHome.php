@@ -67,6 +67,18 @@
         </div>
 
         <div class="majorDiv">
+            <h3>Google Books Search</h3>
+            <div class="search-bar">
+                <input type="text" id="query" placeholder="Enter book title,author, or ISBN">
+                <button onclick="searchBooks()" id="searchbutton">Search</button>
+            </div>
+
+            <div id="book-results" class="book-results"></div>
+        </div>
+        <script src="search.js"></script>
+
+
+        <div class="majorDiv">
             <h3>Statistics</h3>
             <div class="minorDiv"> 
             </div>
