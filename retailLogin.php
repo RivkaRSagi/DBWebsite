@@ -1,30 +1,30 @@
 <?php
-    include 'db.php';
-    session_start();
+include 'db.php';
+session_start();
 
-    if($_SERVER['REQUEST_METHOD']==='POST'){
-        $storeName = $_POST['storename'];
-        $address = $_POST['storeaddress'];
+if($_SERVER['REQUEST_METHOD']==='POST'){
+    $storeName = $_POST['storename'];
+    $address = $_POST['storeaddress'];
 
-        //check if exists in db
-        $sql = "SELECT * FROM retail WHERE StoreName = ? AND Address = ?";
-        $statement = $conn->prepare($sql);
-        $statement->bind_param("ss", $storeName, $address);
-        $statement->execute();
-        $result = $statement->get_result();
+    //check if exists in db
+    $sql = "SELECT * FROM retail WHERE StoreName = ? AND Address = ?";
+    $statement = $conn->prepare($sql);
+    $statement->bind_param("ss", $storeName, $address);
+    $statement->execute();
+    $result = $statement->get_result();
 
-        if($result->num_rows === 1){
-            $_SESSION['storename'] = $storeName;
-            $_SESSION['storeaddress'] =  $address;
-            header("Location: retailHome.php");
-            exit;
-        }else{
-            echo "Invalid input";
-        }
-
-        $statement->close();
-        $conn->close();
+    if($result->num_rows === 1){
+        $_SESSION['storename'] = $storeName;
+        $_SESSION['storeaddress'] =  $address;
+        header("Location: retailHome.php");
+        exit;
+    }else{
+        echo "Invalid input";
     }
+
+    $statement->close();
+    $conn->close();
+}
 ?>
 
 <!DOCTYPE html>

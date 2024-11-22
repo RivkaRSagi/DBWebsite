@@ -13,7 +13,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
     $statement->execute();       
     $result = $statement->get_result();
 
-    if($result->num_rows ===1 ){
+    if($result->num_rows === 1){
         $_SESSION['libraryname'] = $library;
         $_SESSION['branch'] = $branch;
         header("Location: libraryHome.php");
