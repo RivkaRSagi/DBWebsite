@@ -50,7 +50,7 @@ function AllOptions($ISBN) {
 
 // statistics
 
-function BorrowDemand() {
+function BorrowDemand($conn) {
   // put data in asociative php array and export to json
   $query = "SELECT * FROM BorrowDemand";
   $result = $conn->query($query);
@@ -58,6 +58,7 @@ function BorrowDemand() {
 
   if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
+      //echo $row[];
         $data[$row['ISBN']] = $row['Count'];
     }
     $json = exportToJSON($data);

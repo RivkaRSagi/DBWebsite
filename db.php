@@ -1,7 +1,7 @@
 <?php
 //Configure Database
 $host = "localhost";
-$db = "finalproject";
+$db = "sys2";
 $user = "root"; //global permissions given to this user for this project, can be changed in phpmyadmin
 $pass = "";
 

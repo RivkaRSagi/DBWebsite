@@ -3,16 +3,16 @@
 //Export to JSON
 function exportToJSON($data)
 {
-    header('Content-Type: application/json');
+    //header('Content-Type: application/json');
 
-    echo json_encode($data);
+    //echo json_encode($data);
 
     //Save data as JSON file
-    $file = 'data.json';
-    file_put_contents($file, json_encode($data));
+    //$file = 'data.json';
+    //file_put_contents($file, json_encode($data));
 
-    echo "Data has been exported to $file";
-    return $file;
+    //echo "Data has been exported to $file";
+    return json_encode($data);
 }
 
 //Export to CSV

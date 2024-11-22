@@ -126,7 +126,7 @@ CREATE TABLE RetailStock
   UnitPrice DECIMAL(10, 2) NOT NULL,
   Quantity INT NOT NULL,
   StoreName VARCHAR(255) NOT NULL,
-  FOREIGN KEY (ISBN) REFERENCES Textbook(Textbook) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (ISBN) REFERENCES Textbook(ISBN) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (StoreName) REFERENCES Retail(StoreName) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -352,12 +352,12 @@ WHERE  lb.borrowstatus = 0
 
 -- LIBRARY (number of borrows for each textbook)
 CREATE VIEW BorrowDemand AS
-SELECT COUNT(*), ISBN
+SELECT COUNT(*) as Count, ISBN
 FROM BookLoans
 GROUP BY ISBN;
 
 -- RETAIL (number of sales of each textbook)
 CREATE VIEW RetailDemand AS
-SELECT count(*), isbn
+SELECT count(*) as Count, isbn
 FROM ItemSales
 GROUP BY isbn;

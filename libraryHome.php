@@ -55,12 +55,13 @@
                             <td>".$row['BorrowStatus'];
                         }
                         $retreival->close();
-                        $conn->close();
+                        //$conn->close();
                     ?>
                 </table>
             </div>
         </div>
 
+        <?php $json =  BorrowDemand($conn); ?>
 
         <div class="majorDiv">
             <h3>Statistics</h3>
@@ -68,8 +69,8 @@
                 
                    
             <canvas id="mylibraryChart" style="width:100%;max-width:800px;text-align:center"></canvas>
-            <?php $json = BorrowDemand(); ?>
             <script> //this is just using static data, still need to set up with json
+            <?php $json = BorrowDemand(); ?>
             const xValues = [50,60,70,80,90,100,110,120,130,140,150];
             const yValues = [7,8,8,9,9,9,10,11,14,14,15];
             const barColors = ["red", "green","blue","orange","brown"];
