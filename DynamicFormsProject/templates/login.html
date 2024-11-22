@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Login Page</h1>
+    <form id="loginForm">
+        <label for="role">Select Role:</label>
+        <select id="role" name="role">
+            <option value="student">Student</option>
+            <option value="librarian">Librarian</option>
+            <option value="retail">Retail</option>
+        </select>
+
+        <div id="dynamicForm"></div>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <script>
+        $(document).ready(function() {
+            // Load dynamic form based on selected role
+            $('#role').change(function() {
+                const role = $(this).val();
+                $.ajax({
+                    url: `/load_form/${role}`,
+                    method: 'GET',
+                    success: function(data) {
+                        $('#dynamicForm').html(data);
+                    }
+                });
+            });
+
+            // Trigger change to load the initial form
+            $('#role').trigger('change');
+
+            // Handle form submission
+            $('#loginForm').submit(function(event) {
+                event.preventDefault();
+                const formData = $(this).serialize();
+
+                $.ajax({
+                    url: '/submit_form',
+                    method: 'POST',
+                    data: formData,
+                    success: function(response) {
+                        alert('Form submitted successfully!');
+                    },
+                    error: function(err) {
+                        alert('Error submitting form!');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
