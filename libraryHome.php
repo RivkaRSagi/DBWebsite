@@ -1,5 +1,6 @@
 <?php
     include 'db.php';
+    include 'queries.php';
     session_start();
     
     if($_SERVER['REQUEST_METHOD']==='POST'){
@@ -67,7 +68,7 @@
                 
                    
             <canvas id="mylibraryChart" style="width:100%;max-width:800px;text-align:center"></canvas>
-
+            <?php $json = BorrowDemand(); ?>
             <script> //this is just using static data, still need to set up with json
             const xValues = [50,60,70,80,90,100,110,120,130,140,150];
             const yValues = [7,8,8,9,9,9,10,11,14,14,15];

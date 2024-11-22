@@ -1,6 +1,7 @@
 <?php
 
 include 'db.php';
+include 'exportData.php';
 
 // views
 // 1. todo: reform and allow parameters somehow
@@ -53,12 +54,14 @@ function BorrowDemand() {
   // put data in asociative php array and export to json
   $query = "SELECT * FROM BorrowDemand";
   $result = $conn->query($query);
-
+  $data = array();
 
   if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-
+        $data[$row['ISBN']] = $row['Count'];
     }
+    $json = exportToJSON($data);
+    return $json;
   } else {
     echo "no results"; // error here instead
   }
