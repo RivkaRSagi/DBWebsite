@@ -13,7 +13,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
     $statement->execute();       
     $result = $statement->get_result();
 
-    if($result->num_rows ===1 ){
+    if($result->num_rows === 1){
         $_SESSION['University'] = $uniname;
         $_SESSION['StudentID'] = $studentNum;
         header("Location: studentHome.php");
@@ -44,7 +44,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
                     <div class="University">
                         <label for="University">University</label>
                         <br>
-                        <input type="text" id="University" name="University" placeholder="Enter University name" required/>
+                        <input type="text" id="University" name="University" placeholder="Enter University Name" required/>
                     </div>
                     <div class="password">
                         <label for="StudentID">StudentID</label>
