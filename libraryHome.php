@@ -17,6 +17,7 @@
     <meta charset="utf-8">
     <title>Library Home</title>
     <link rel="stylesheet" href="index.css">
+    <script src ="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </head>
 <body>
     <div class="menuBar">
@@ -58,6 +59,47 @@
                 </table>
             </div>
         </div>
+
+
+        <div class="majorDiv">
+            <h3>Statistics</h3>
+            <div class="minorDiv"> <!-- using chart.js for the statistics -->
+                
+                   
+            <canvas id="mylibraryChart" style="width:100%;max-width:800px;text-align:center"></canvas>
+
+            <script> //this is just using static data, still need to set up with json
+            const xValues = [50,60,70,80,90,100,110,120,130,140,150];
+            const yValues = [7,8,8,9,9,9,10,11,14,14,15];
+            const barColors = ["red", "green","blue","orange","brown"];
+
+            const chart = new Chart("mylibraryChart", {
+            type: "line",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    fill: false,
+                    lineTension: 0,
+                    backgroundColor: "green",
+                    borderColor: "green",
+                    data: yValues
+                }]
+            },
+            options: {
+                legend: {display: true},
+                scales: {
+                    yAxes: [{ticks: {min: 0, max: 20}}]
+                },
+                title: {
+                display: true,
+                text: "textbook statistics"
+                }
+            }
+            });
+            </script> 
+            </div>
+        </div>
+
         <div class="majorDiv">
             <h3>Google Books Search</h3>
             <div class="search-bar">
@@ -68,13 +110,6 @@
             <div id="book-results" class="book-results"></div>
         </div>
         <script src="search.js"></script>
-
-
-        <div class="majorDiv">
-            <h3>Statistics</h3>
-            <div class="minorDiv"> 
-            </div>
-        </div>
     </div>
 </body>
 </html>
