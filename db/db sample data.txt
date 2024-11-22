@@ -26,7 +26,8 @@ VALUES
 ("phys1000u", "Introductory Physics", "Ontario Tech University"),
 ("psyc1000u", "Introductory Psychology", "Ontario Tech University"),
 ("psyc2000u", "Behavioural Psychology", "Ontario Tech University"),
-("phys1000u", "Introductory Physics", "Trent University")
+("phys1000u", "Introductory Physics", "Trent University"),
+("phys1000u", "Introductory Physics", "York University")
 ;
 
 INSERT INTO Student(StudentName, StudentID, University)
@@ -176,7 +177,7 @@ VALUES
 ("elee2200u", "Ontario Tech University", 3),
 ("phys1000u", "Ontario Tech University", 4),
 ("psyc1000u", "Ontario Tech University", 5),
-("pysc2000u", "Ontario Tech University", 6),
+("psyc2000u", "Ontario Tech University", 6),
 ("phys1000u", "Trent University", 4)
 ;
 
