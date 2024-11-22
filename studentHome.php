@@ -68,7 +68,6 @@
                         while($row = $retreival->fetch_assoc()){
                             echo "<tr><td>".$row['LibraryName']."</td>
                             <td>".$row['CardID'];
-                            
                         }
                        
                         $retreival->close();

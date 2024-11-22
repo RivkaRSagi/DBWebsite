@@ -19,7 +19,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
         header("Location: libraryHome.php");
         exit;
     }else{
-        echo "Invalid input";
+        $error_message = "Invalid Library Name or Branch";
     }
 
     $statement->close();
@@ -57,6 +57,12 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
                         </button>
                     </div>                   
                 </form>
+                <!-- Show the error message if it exists -->
+                <?php if (!empty($error_message)):?>
+                    <p class="errorMessageBox" style="color: red;">
+                        <?php echo htmlspecialchars($error_message); ?>
+                    </p>
+                <?php endif; ?>
             </div>
         </div>
     </body>
