@@ -126,6 +126,7 @@ CREATE TABLE RetailStock
   UnitPrice DECIMAL(10, 2) NOT NULL,
   Quantity INT NOT NULL,
   StoreName VARCHAR(255) NOT NULL,
+  FOREIGN KEY (ISBN) REFERENCES Textbook(Textbook) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (StoreName) REFERENCES Retail(StoreName) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -199,6 +200,7 @@ CREATE TABLE StudentCourses
 -- 1
 CREATE VIEW AllOptions AS
 select DISTINCT
+ sbu.ISBN as ISBN,
  sbu.copyID as usedCopyID,
  sbu.unitPrice AS usedUnitPrice,
  sbu.AvailabilityStatus, 
@@ -209,10 +211,10 @@ sbn.SchoolName as newSchoolName,
 lb.CopyID as libCopyID, 
 lb.BorrowStatus, 
 lb.LibraryName
-from SchoolBooksNew as sbn
-JOIN SchoolBooksUsed as sbu
-JOIN LibraryBooks as lb
-where lb.ISBN = 1 and sbn.ISBN = 1 and sbu.ISBN = 1;
+from schoolbooksnew as sbn
+JOIN schoolbooksused as sbu
+JOIN librarybooks as lb
+where lb.ISBN = sbn.ISBN and sbu.ISBN = lb.ISBN;
 
 -- 2
 CREATE VIEW StudentPrices as

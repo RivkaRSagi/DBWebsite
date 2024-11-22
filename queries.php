@@ -5,7 +5,26 @@ include 'db.php';
 // views
 // 1. todo: reform and allow parameters somehow
 function AllOptions($ISBN) {
-    $query = "SELECT * FROM ";
+    $query = sprintf("SELECT * FROM AllOptions WHERE ISBN = %u", $ISBN);
+    $result = $conn->query($query);
+
+    if ($result->num_rows > 0) {
+      // output data of each row
+      while($row = $result->fetch_assoc()) {
+        echo "UsedCopyID: ".$row['UsedCopyID'].
+        "usedUnitPrice: ".$row['UsedUnitPrice'].
+        "Availability Status: ".$row['AvailabilityStatus'].
+        "UsedSchoolName: ".$row['UsedSchoolName'].
+        "NewUnitPrice: ".$row['NewUnitPrice'].
+        "Quantity: ".$row['Quantity'].
+        "NewSchoolName: ".$row['NewSchoolName'].
+        "LibCopyID: ".$row['LibCopyID'].
+        "BorrowStatus: ".$row['BorrowStatus'].
+        "LibraryName: ".$row['LibraryName']."<br>";
+      }
+    } else {
+      echo "0 results";
+    }
 }
 
  // 2. also reform to make parameters
@@ -29,6 +48,21 @@ function AllOptions($ISBN) {
 
 
 // statistics
+
+function BorrowDemand() {
+  // put data in asociative php array and export to json
+  $query = "SELECT * FROM BorrowDemand";
+  $result = $conn->query($query);
+
+
+  if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+
+    }
+  } else {
+    echo "no results"; // error here instead
+  }
+}
 
 // misc
 
