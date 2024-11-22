@@ -192,3 +192,8 @@ button:hover{
     font-size: 14px;
     color: #555;
 }
+.majorDiv .minorDiv .searchtextbook #query{
+    padding: 10px;
+    font-size: 12px;
+    width: 500px;
+}

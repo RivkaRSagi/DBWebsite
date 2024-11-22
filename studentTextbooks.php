@@ -25,6 +25,53 @@
         <div class="majorDiv">
             <h3>Textbooks</h3>
             <div class="minorDiv">
+                <div class="searchtextbook">
+                    <input type="text" id="query" placeholder="Enter Course Name or Course ID">
+                 </div>
+                <div id="tableResults">
+                    <table>
+                        <tr>
+                        <th>Course Name</th>
+                        <th>Course ID</th>
+                        <th>Textbook Name</th>
+                        <th>ISBN</th>
+                        </tr>
+                     <?php
+                        include 'db.php';
+                        session_start();
+                        $studentID = $_SESSION['StudentID'];
+        
+                        $sql = "SELECT 
+                            c.CourseName, 
+                            c.CourseID, 
+                            t.Title AS TextbookName, 
+                            ct.ISBN
+                            FROM StudentCourses sc
+                            JOIN Courses c ON sc.CourseID = c.CourseID AND sc.SchoolName = c.SchoolName
+                            JOIN CourseTextbook ct ON c.CourseID = ct.CourseID AND c.SchoolName = ct.SchoolName
+                            JOIN Textbook t ON ct.ISBN = t.ISBN
+                            WHERE sc.StudentID = '$studentID'
+                        ";
+                        $result = $conn->query($sql);
+
+                        if ($result->num_rows > 0) {
+                            while($row = $result->fetch_assoc()) {
+                                echo "<tr>
+                                    <td>" . $row['CourseName'] . "</td>
+                                    <td>" . $row['CourseID'] . "</td>
+                                    <td>" . $row['TextbookName'] . "</td>
+                                    <td>" . $row['ISBN'] . "</td>
+                                </tr>";
+                            }
+                        } 
+                        else {
+                            echo "<tr><td colspan='4'>No courses or textbooks found for this student.</td></tr>";
+                        }
+                        $result->close();
+                        $conn->close();
+                        ?>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
