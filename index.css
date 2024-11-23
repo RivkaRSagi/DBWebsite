@@ -197,3 +197,20 @@ button:hover{
     font-size: 12px;
     width: 500px;
 }
+.majorDiv .minorDiv .searchtextbook{
+    padding-bottom: 25px;
+}
+.majorDiv .minorDiv .searchtextbook #searchBtn{
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: rgb(0, 196, 214);
+    color: white;
+    border: none;
+    margin-left: 10px;
+    text-align: center;
+    height: fit-content;
+}
+.majorDiv .minorDiv .tableResults{
+    line-height: 2;
+}

@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>Student Home</title>
     <link rel="stylesheet" href="index.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <div class="menuBar">
@@ -27,8 +28,9 @@
             <div class="minorDiv">
                 <div class="searchtextbook">
                     <input type="text" id="query" placeholder="Enter Course Name or Course ID">
-                 </div>
-                <div id="tableResults">
+                    <button id="searchBtn">Search</button>
+                </div>
+                <div class="tableResults" id="tableResults">
                     <table>
                         <tr>
                         <th>Course Name</th>
@@ -75,5 +77,29 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $("#searchBtn").on("click", function(){
+            var query = $("#query").val();
+            if (query.length >= 0){
+                $.ajax({
+                    url: "searchprices.php",
+                    method: "GET",
+                    data: { query: query },
+                    success: function(response){
+                        $("#tableResults table").html(response);
+                    }
+                });
+            } else {
+                $.ajax({
+                    url: "searchprices.php",
+                    method: "GET",
+                    success: function(response){
+                        $("#tableResults table").html(response);
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
