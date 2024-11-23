@@ -1,6 +1,5 @@
 <?php
-
-include 'db.php';
+include 'databaseConnection.php';
 include 'exportData.php';
 
 // views
@@ -45,11 +44,7 @@ function AllOptions($ISBN) {
       }
  }
 
- 
-
-
 // statistics
-
 function BorrowDemand($conn) {
   // put data in asociative php array and export to json
   $query = "SELECT * FROM BorrowDemand";
