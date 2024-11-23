@@ -1,5 +1,5 @@
 <?php
-include 'databaseConnection.php';
+include 'db.php';
 include 'exportData.php';
 
 // views
