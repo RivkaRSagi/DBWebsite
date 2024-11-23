@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Librarian Dashboard</title>
+</head>
+<body>
+    <h1>Manage Textbook Stock</h1>
+    <form action="/submit_form" method="POST">
+        <!-- Add form fields for librarian information -->
+        
+        <label for="book_title">Book Title:</label>
+        <input type="text" id="book_title" name="book_title" required>
+        
+        <label for="isbn">ISBN:</label>
+        <input type="text" id="isbn" name="isbn" required>
+        
+        <label for="copy_ID">Copy ID:</label>
+        <input type="text" id="copy_ID" name="copy_ID" required>
+
+        <label for="action">Action:</label>
+        <select id="action" name="action">
+            <option value="add">Add Book</option>
+            <option value="remove">Remove Book</option>
+            <option value="update">Update Book</option>
+        </select>
+        
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
