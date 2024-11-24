@@ -98,19 +98,18 @@
                 datasets: [{
                     fill: false,
                     lineTension: 0,
-                    backgroundColor: "green",
-                    borderColor: "green",
+                    backgroundColor: barColors,
                     data: borrows
                 }]
             },
             options: {
                 legend: {display: false},
                 scales: {
-                    yAxes: [{ticks: {min: 0, max: 20}}]
+                    yAxes: [{ticks: {min: 0, max: 20}}],
                 },
                 title: {
                 display: true,
-                text: "Borrowing Statistics"
+                text: "Borrowing Statistics: Borrows per Textbook"
                 }
             }
             });
