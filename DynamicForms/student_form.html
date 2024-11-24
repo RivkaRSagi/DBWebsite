@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Form</title>
+</head>
+<body>
+    <form id="studentForm">
+        <h1>Student Information</h1>
+        <label for="student_ID">Student ID:</label>
+        <input type="text" id="student_ID" name="student_ID" required>
+        <label for="university">University:</label>
+        <input type="text" id="university" name="university" required>
+        <button type="submit">Submit</button>
+    </form>
+    <script>
+        document.getElementById('studentForm').addEventListener('submit', (event) => {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            console.log(Object.fromEntries(formData)); // Log form data
+            alert('Form submitted successfully!');
+        });
+    </script>
+</body>
+</html>

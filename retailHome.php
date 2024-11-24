@@ -1,5 +1,6 @@
 <?php
 include 'db.php';
+include 'queries.php';
 session_start();
 
 $storeName = $_SESSION['storename'];
@@ -17,15 +18,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
         $price = $_POST['price'];
         $quantity = $_POST['quantity'];
 
-        $sqlCreate = "INSERT INTO retailstock (ISBN, UnitPrice, Quantity, StoreName)
-        VALUES ($ISBN, $price, $quantity, '$storeName');";
-
-        $insertion = $conn->query($sqlCreate);
-        if($insertion === TRUE){
-            echo "New record created successfully";
-        }else{
-            echo "ERROR: ".$sqlCreate."<br>". $conn->error;
-        }
+        AddItem($conn, $ISBN, $price, $quantity, $storeName);
 
     }
     else if(isset($_POST['removeItem'])){ //STILL NEEDS ERROR HANDLING
@@ -142,7 +135,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
                                     </div>
                                     <div class="submit">
                                         <input type="hidden" name="addItem" value="addItem">
-                                        <button type="submit">
+                                        <button type="submit" onclick=AddItem>
                                             confirm
                                         </button>
                                     </div>
