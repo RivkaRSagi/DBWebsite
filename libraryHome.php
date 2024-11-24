@@ -61,7 +61,12 @@
             </div>
         </div>
 
-        <?php echo BorrowDemand($conn); ?>
+        <?php 
+            $json =  BorrowDemand($conn);
+        ?>
+            <script>var Json = <?php echo $json; ?>;
+             console.log(Json);</script>
+        
 
         <div class="majorDiv">
             <h3>Statistics</h3>

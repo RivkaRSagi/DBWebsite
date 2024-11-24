@@ -48,7 +48,7 @@ function AllOptions($conn, $ISBN) {
 }
 
  // 3
- function TextbooksRequired(){
+ function TextbooksRequired($conn){
     $query = "SELECT * FROM TextbooksRequired;";
     $result = $conn->query($query);
 
@@ -61,6 +61,60 @@ function AllOptions($conn, $ISBN) {
         echo "0 results";
       }
  }
+
+ // 8
+ function LibraryOptions($conn, $studentID){
+  $query = sprintf("SELECT * FROM LibraryOptions WHERE StudentID = %u;", $studentID);
+  $result = $conn->query($query);
+
+  if ($result->num_rows > 0) {
+      // output data of each row
+      while($row = $result->fetch_assoc()) {
+        echo "StudentID: " . $row['StudentID'] .
+         ", ISBN: " . $row['ISBN'] .
+          ", copyID: " . $row['copyid'] .
+           ", BorrowStatus: " . $row['borrowstatus'] .
+           ", LibraryName". $row["libraryname"]. "<br>";
+      }
+    } else {
+      echo "0 results";
+    }
+}
+
+function PurchaseOptions($conn) {
+  $query = sprintf("SELECT * FROM PurchaseOptions");
+  $result = $conn->query($query);
+
+  if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+      echo ", title: ".$row['title'].
+      ", sourceOfSale: ".$row['sourceOfSale'].
+      ", Price: ".$row['Price'].
+      "<br>";
+    }
+  } else {
+    echo "0 results";
+  }
+}
+
+function AvailableRentals($conn) {
+  $query = sprintf("SELECT * FROM AvailableRentals");
+  $result = $conn->query($query);
+
+  if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+      echo "ISBN: ".$row['ISBN'].
+      "title: ".$row['title'].
+      ", unitPrice: ".$row['unitPrice'].
+      ", AvailabilityStatus: ".$row['AvailabilityStatus'].
+      "<br>";
+    }
+  } else {
+    echo "0 results";
+  }
+}
 
 
 
