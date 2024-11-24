@@ -61,7 +61,7 @@
             </div>
         </div>
 
-        <?php echo AllOptions($conn, 7); ?>
+        <?php echo BorrowDemand($conn); ?>
 
         <div class="majorDiv">
             <h3>Statistics</h3>
