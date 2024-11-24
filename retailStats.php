@@ -5,7 +5,7 @@ session_start();
 
 if($_SERVER['REQUEST_METHOD']==='POST'){
     if($_POST['Logout']){
-        $SESSION = array();
+        $_SESSION = array();
         header("Location: login.html");
         exit;
     }
