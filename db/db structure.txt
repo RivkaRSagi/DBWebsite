@@ -217,7 +217,7 @@ JOIN librarybooks as lb
 where lb.ISBN = sbn.ISBN and sbu.ISBN = lb.ISBN;
 
 -- 2
-CREATE VIEW StudentPrices as
+CREATE VIEW StudentPrices AS
 SELECT
 	t.ISBN,
 	bs.UnitPrice AS BookStorePrice,
@@ -232,9 +232,9 @@ LEFT JOIN
 LEFT JOIN
 	PrivateSales AS ps ON bs.ISBN = ps.ISBN
 WHERE
-	bs.UnitPrice < 200 and rs.UnitPrice < 200 AND ps.isbn < 200
-    and bs.ISBN = 2 and rs.isbn = 2 and ps.isbn = 2 and t.isbn = 2
+    bs.ISBN = rs.ISBN and bs.isbn = ps.ISBN and bs.isbn = t.isbn
     ;
+
 -- 3
 CREATE VIEW TextbooksRequired AS
 SELECT 
