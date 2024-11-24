@@ -65,7 +65,19 @@
             $json =  BorrowDemand($conn);
         ?>
             <script>var Json = <?php echo $json; ?>;
-             console.log(Json);</script>
+
+             let books = Array.from(Object.keys(Json));
+             let borrows = Array.from(Object.values(Json));
+             console.log(books);
+             console.log(borrows);
+
+             function intCast(element){
+                element = Number(element);
+             }
+             borrows.forEach(intCast);
+             console.log(borrows);
+             console.log(typeof borrows);
+             </script>
         
 
         <div class="majorDiv">
@@ -74,33 +86,30 @@
                 
                    
             <canvas id="mylibraryChart" style="width:100%;max-width:800px;text-align:center"></canvas>
-            <?php echo BorrowDemand($conn); ?>
-            <script> //this is just using static data, still need to set up with json
             
-            const xValues = [50,60,70,80,90,100,110,120,130,140,150];
-            const yValues = [7,8,8,9,9,9,10,11,14,14,15];
+            <script> //this is just using static data, still need to set up with json
             const barColors = ["red", "green","blue","orange","brown"];
 
             const chart = new Chart("mylibraryChart", {
-            type: "line",
+            type: "bar",
             data: {
-                labels: xValues,
+                labels: books,
                 datasets: [{
                     fill: false,
                     lineTension: 0,
                     backgroundColor: "green",
                     borderColor: "green",
-                    data: yValues
+                    data: borrows
                 }]
             },
             options: {
-                legend: {display: true},
+                legend: {display: false},
                 scales: {
                     yAxes: [{ticks: {min: 0, max: 20}}]
                 },
                 title: {
                 display: true,
-                text: "textbook statistics"
+                text: "Borrowing Statistics"
                 }
             }
             });
