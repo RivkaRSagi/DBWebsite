@@ -1,6 +1,7 @@
 <?php
 include 'db.php';
 include 'exportData.php';
+include 'queries.php';
 session_start();
 
 if($_SERVER['REQUEST_METHOD']==='POST'){
@@ -82,7 +83,7 @@ if (isset($_POST['exportsales'])) {
                         }
                        
                         $retreival->close();
-                        $conn->close();
+                       
                     ?>
             </table>
         </div>         
@@ -95,6 +96,7 @@ if (isset($_POST['exportsales'])) {
 
     <?php 
             $json =  RetailDemand($conn);
+            $conn->close();
         ?>
             <script>var Json = <?php echo $json; ?>;
 
