@@ -62,6 +62,60 @@ function AllOptions($conn, $ISBN) {
       }
  }
 
+ // 4
+ function BuyingOptions($conn){
+  $query = "SELECT * FROM BuyingOptions;";
+  $result = $conn->query($query);
+
+  if ($result->num_rows > 0) {
+      // output data of each row
+      while($row = $result->fetch_assoc()) {
+        echo "StoreName: " . $row['StoreName'] .
+         ", Address: " . $row['Address'] .
+          ", ISBN: " . $row['ISBN'] .
+           ", UnitPrice: " . $row['UnitPrice'] .
+           ", Quantity: ". $row["Quantity"]. "<br>";
+      }
+    } else {
+      echo "0 results";
+    }
+}
+
+// 
+function SchoolBookStoreOptions($conn){
+  $query = "SELECT * FROM schoolbookstoreoptions;";
+  $result = $conn->query($query);
+
+  if ($result->num_rows > 0) {
+      // output data of each row
+      while($row = $result->fetch_assoc()) {
+        echo "ISBN: " . $row['ISBN'] .
+         ", SchoolName: " . $row['SchoolName'] .
+          ", InStock  : " . $row['InStock'] .
+           ", UnitPrice: " . $row['UnitPrice'] . "<br>";
+      }
+    } else {
+      echo "0 results";
+    }
+}
+
+ // 7
+function CheapestTextbooks($conn) {
+  $query = sprintf("SELECT * FROM CheapestTextbooks");
+  $result = $conn->query($query);
+
+  if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+      echo ", ISBN: ".$row['ISBN'].
+      ", MinPrice: ".$row['MinPrice'].
+      "<br>";
+    }
+  } else {
+    echo "0 results";
+  }
+}
+
  // 8
  function LibraryOptions($conn, $studentID){
   $query = sprintf("SELECT * FROM LibraryOptions WHERE StudentID = %u;", $studentID);
@@ -81,6 +135,7 @@ function AllOptions($conn, $ISBN) {
     }
 }
 
+// 9
 function PurchaseOptions($conn) {
   $query = sprintf("SELECT * FROM PurchaseOptions");
   $result = $conn->query($query);
@@ -98,6 +153,7 @@ function PurchaseOptions($conn) {
   }
 }
 
+//10
 function AvailableRentals($conn) {
   $query = sprintf("SELECT * FROM AvailableRentals");
   $result = $conn->query($query);
