@@ -39,6 +39,8 @@ if (isset($_POST['exportsales'])) {
     <meta charset="utf-8">
     <title>Retail Home</title>
     <link rel="stylesheet" href="index.css">
+    <script src ="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
 </head>
 <body>
     <div class="menuBar">
@@ -67,11 +69,21 @@ if (isset($_POST['exportsales'])) {
                     <th>Quantity</th>
                     <th>SaleID</th>
                 </tr>
-                <tr>
-                    <td>fetch from db here</td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                <?php  
+                        $storeName = $_SESSION['storename'];
+                        $sql = "SELECT ProductName, Quantity, SaleID
+                         FROM itemsales  WHERE StoreName = '$storeName'";
+                        
+                        $retreival = $conn->query($sql);
+                        while($row = $retreival->fetch_assoc()){
+                            echo "<tr><td>".$row['ProductName']."</td>
+                            <td>".$row['Quantity']."</td>
+                            <td>".$row['SaleID'];
+                        }
+                       
+                        $retreival->close();
+                        $conn->close();
+                    ?>
             </table>
         </div>         
     </div>
@@ -81,9 +93,54 @@ if (isset($_POST['exportsales'])) {
         <button type="submit" name="exportsales">Export Sales Log</button>
     </form>
 
+    <?php 
+            $json =  RetailDemand($conn);
+        ?>
+            <script>var Json = <?php echo $json; ?>;
+
+             let books = Array.from(Object.keys(Json));
+             let buys = Array.from(Object.values(Json));
+             console.log(books);
+             console.log(buys);
+
+             function intCast(element){
+                element = Number(element);
+             }
+             buys.forEach(intCast);
+             console.log(buys);
+             </script>
+
     <div class="majorDiv">
         <h3>Statistics</h3>
         <div class="minorDiv">
+        <canvas id="mylibraryChart" style="width:100%;max-width:800px;text-align:center"></canvas>
+            
+            <script> //this is just using static data, still need to set up with json
+            const barColors = ["red", "green","blue","orange","brown"];
+
+            const chart = new Chart("mylibraryChart", {
+            type: "bar",
+            data: {
+                labels: books,
+                datasets: [{
+                    fill: false,
+                    lineTension: 0,
+                    backgroundColor: barColors,
+                    data: buys
+                }]
+            },
+            options: {
+                legend: {display: false},
+                scales: {
+                    yAxes: [{ticks: {min: 0, max: 20}}],
+                },
+                title: {
+                display: true,
+                text: "Buying Statistics: Purchases per Textbook"
+                }
+            }
+            });
+            </script> 
         </div>
     </div>
     </div>
