@@ -48,14 +48,18 @@
                         $sql = "SELECT Title, L.ISBN, CopyID, BorrowStatus
                          FROM librarybooks AS L JOIN textbook AS T ON L.ISBN=T.ISBN WHERE LibraryName = '$name'";
                         $retreival = $conn->query($sql);
-                        while($row = $retreival->fetch_assoc()){
-                            echo "<tr><td>".$row['Title']."</td>
-                            <td>".$row['ISBN']."</td>
-                            <td>".$row['CopyID']."</td>
-                            <td>".$row['BorrowStatus'];
+                        if ($retreival->num_rows > 0) {
+                            while($row = $retreival->fetch_assoc()){
+                                echo "<tr><td>".$row['Title']."</td>
+                                <td>".$row['ISBN']."</td>
+                                <td>".$row['CopyID']."</td>
+                                <td>".$row['BorrowStatus'];
+                            }
+                            $retreival->close();
+                            //$conn->close();
+                        } else {
+                            echo "no results";
                         }
-                        $retreival->close();
-                        //$conn->close();
                     ?>
                 </table>
             </div>

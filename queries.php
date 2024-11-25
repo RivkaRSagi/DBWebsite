@@ -81,7 +81,7 @@ function AllOptions($conn, $ISBN) {
     }
 }
 
-// 
+//    
 function SchoolBookStoreOptions($conn){
   $query = "SELECT * FROM schoolbookstoreoptions;";
   $result = $conn->query($query);
@@ -203,7 +203,7 @@ function RetailDemand($conn){
   if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
       //echo $row[];
-        $data[$row['ISBN']] = $row['Count'];
+        $data[$row['isbn']] = $row['Count'];
     }
     $json = exportToJSON($data);
     return $json;

@@ -16,26 +16,33 @@ function exportToJSON($data)
 }
 
 //Export to CSV
-function exportToCSV($header, $data, $fileName)
+function exportToCSV( $data, $fileName)
 {
     //Path
     $file = $fileName . ".csv";
-    header("Content-Type: text/csv");
-    header('Content-Disposition: attachment; filename="' . $file . '"');
 
     //Open file to output stream
-    $fp = fopen('php://output', 'w');
-
-    //Header Row
-    fputcsv($fp, $header);
+    $fp = fopen($file, 'w');
 
     //Write Data
     foreach ($data as $row)
     {
         fputcsv($fp, $row);
+        echo $row;
     }
 
     //Close file
     fclose($fp);
+    echo $data;
+
+    //header('Content-Description: File Transfer');
+header('Content-Disposition: attachment; filename='.basename($file));
+header('Expires: 0');
+header('Cache-Control: must-revalidate');
+header('Pragma: public');
+header('Content-Length: ' . filesize($file));
+header("Content-Type: text/csv");
+readfile($file);
+echo $data;
 }
 ?>

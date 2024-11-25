@@ -1,8 +1,9 @@
 <?php
 include 'db.php';
-include 'exportData.php';
+//include 'exportData.php';
 include 'queries.php';
 session_start();
+$storeName = $_SESSION['storename'];
 
 if($_SERVER['REQUEST_METHOD']==='POST'){
     if($_POST['Logout']){
@@ -13,24 +14,18 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
 }
 
 if (isset($_POST['exportsales'])) {    
-    $query = "SELECT * FROM ItemSales";
+    $query = "SELECT * FROM ItemSales where StoreName = '$storeName'";
     $result = $conn->query($query);
 
     if ($result->num_rows > 0) {
         $data = [];
         while ($row = $result->fetch_assoc()) {
+            //echo "Count, ". $row['Count']. ", ISBN: ".$row['isbn'];
             $data[] = $row;
         }
-    }
-
-    //get columns
-    $columns = [];
-    $fieldInfo = $result->fetch_fields();
-    foreach ($fieldInfo as $field) {
-        $columns[] = $field->name;
-    }
     
-    exportToCSV($columns, $data, "Sales Log");
+    //exportToCSV($data, "Sales_Log");
+    }
 }
 
 ?>
@@ -71,18 +66,21 @@ if (isset($_POST['exportsales'])) {
                     <th>SaleID</th>
                 </tr>
                 <?php  
-                        $storeName = $_SESSION['storename'];
-                        $sql = "SELECT ProductName, Quantity, SaleID
+                        $sql = "SELECT ISBN, Quantity, SaleID
                          FROM itemsales  WHERE StoreName = '$storeName'";
                         
                         $retreival = $conn->query($sql);
-                        while($row = $retreival->fetch_assoc()){
-                            echo "<tr><td>".$row['ProductName']."</td>
-                            <td>".$row['Quantity']."</td>
-                            <td>".$row['SaleID'];
+                        if ($retreival->num_rows > 0) {
+                            while($row = $retreival->fetch_assoc()){
+                                echo "<tr><td>".$row['ISBN']."</td>
+                                <td>".$row['Quantity']."</td>
+                                <td>".$row['SaleID'];
+                            }
+                        } else {
+                            echo "0 results";
                         }
                        
-                        $retreival->close();
+                        //$retreival->close();
                        
                     ?>
             </table>
@@ -96,7 +94,7 @@ if (isset($_POST['exportsales'])) {
 
     <?php 
             $json =  RetailDemand($conn);
-            $conn->close();
+            //$conn->close();
         ?>
             <script>var Json = <?php echo $json; ?>;
 
