@@ -277,7 +277,7 @@ sbu.SchoolName = bs.SchoolName
 
 -- 7
 CREATE VIEW CheapestTextbooks AS 
-select ISBN,MIN(unitprice)
+select ISBN,MIN(unitprice) as MinPrice
 from
 (
 select ISBN, unitprice from SchoolBooksNew
@@ -290,10 +290,9 @@ GROUP BY ISBN
 
 -- 8
 create view LibraryOptions as
-select lb.ISBN, lb.copyid, lb.borrowstatus, lb.libraryname
+select lm.StudentID, lb.ISBN, lb.copyid, lb.borrowstatus, lb.libraryname
 from LibraryBooks as lb
 join LibraryMember as lm on lm.libraryname = lb.libraryname
-where lm.studentid = 1
 ;
 
 -- 9
@@ -335,7 +334,7 @@ FROM
 SchoolBooksUsed sb
 LEFT JOIN 
 Textbook as t on t.isbn = sb.isbn
-where sb.availabilitystatus = 0
+where sb.availabilitystatus = 0;
 
 UNION ALL
 
