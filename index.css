@@ -199,6 +199,7 @@ button:hover{
 }
 .majorDiv .minorDiv .searchtextbook{
     padding-bottom: 25px;
+    display: flex;
 }
 .majorDiv .minorDiv .searchtextbook #searchBtn{
     padding: 10px 20px;
@@ -213,4 +214,16 @@ button:hover{
 }
 .majorDiv .minorDiv .tableResults{
     line-height: 2;
+}
+#filterDropdown{
+    width: 150px;
+    padding: 5px;
+    background-color: azure;
+    text-align: center;
+    color: rgb(123, 136, 136);
+    margin-bottom: 30px
+}
+.tableResults table{
+    border: none;
+    border-collapse: collapse;
 }

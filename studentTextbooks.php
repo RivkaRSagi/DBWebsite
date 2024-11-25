@@ -30,6 +30,19 @@
                     <input type="text" id="query" placeholder="Enter Course Name or Course ID">
                     <button id="searchBtn">Search</button>
                 </div>
+                <div class="filterDiv">
+                    <select id="filterDropdown">
+                        <option value="default">Default</option>
+                        <option value="all">All Textbook Prices</option>
+                        <option value="under100">Prices under $100</option>
+                        <option value="lowtohigh">Price: Low to High</option>
+                        <option value="buying">Buying Options Only</option>
+                        <option value="renting">Renting Options Only</option>
+                        <option value="retail">Retail Stores Only</option>
+                        <option value="schoolbookstore">School Bookstore Only</option>
+                        <option value="library">Library Options Only</option>
+                    </select>
+                </div>
                 <div class="tableResults" id="tableResults">
                     <table>
                         <tr>
@@ -90,6 +103,7 @@
                         $("#tableResults table").html(response);
                     }
                 });
+                
             } else {
                 $.ajax({
                     url: "searchprices.php",
@@ -99,6 +113,21 @@
                     }
                 });
             }
+        });
+         $('#filterDropdown').on('change', function() {
+            var query = $('#query').val(); 
+            var filter = $(this).val();    
+         $.ajax({
+            url: 'filterprices.php',
+            type: 'GET',  
+            data: { query: query, filter: filter },  
+            success: function(data) {
+            $('#tableResults').html(data);
+        },
+            error: function(xhr, status, error) {
+            console.error("AJAX request failed: " + error);
+        }
+         });
         });
     </script>
 </body>
