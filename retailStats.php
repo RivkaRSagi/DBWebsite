@@ -87,10 +87,7 @@ if (isset($_POST['exportsales'])) {
         </div>         
     </div>
 
-    <!-- Export Sales Log Form -->
-    <form action="retailStats.php" method="POST">
-        <button type="submit" name="exportsales">Export Sales Log</button>
-    </form>
+    
 
     <?php 
             $json =  RetailDemand($conn);
