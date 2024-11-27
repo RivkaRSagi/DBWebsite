@@ -1,3 +1,4 @@
+<!--php code for session management and connecting to database-->
 <?php
     include 'db.php';
     include 'queries.php';
@@ -15,6 +16,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <!--chart.js library is imported here, and the page is connected to index.css for styling-->
     <meta charset="utf-8">
     <title>Library Home</title>
     <link rel="stylesheet" href="index.css">
@@ -31,6 +33,7 @@
             </div>
         </div>
     </div>
+    <!--display welcome message for the logged in user-->
     <div class="bodyDiv">
         <h1 id="welcome">Welcome <?php echo $_SESSION['libraryname'] .", <br>". $_SESSION['branch']." location"?> </h1>
         <div class="majorDiv">
@@ -43,6 +46,7 @@
                         <th>CopyID</th>
                         <th>Status</th>
                     </tr>
+                    <!--php while loop to pull and display library stock to the web page-->
                     <?php  
                         $name = $_SESSION['libraryname'];
                         $sql = "SELECT Title, L.ISBN, CopyID, BorrowStatus
@@ -56,7 +60,6 @@
                                 <td>".$row['BorrowStatus'];
                             }
                             $retreival->close();
-                            //$conn->close();
                         } else {
                             echo "no results";
                         }
@@ -68,22 +71,24 @@
 
         
         <?php 
-                        // encodes the sql data to json and then adds the keys and values to a javascript array for graphing the statistics 
-                        $json =  BorrowDemand($conn);
+               // encodes the sql data to json and then adds the keys and values to a javascript array for graphing the statistics 
+               $json =  BorrowDemand($conn);
         ?>
+            
             <script>var Json = <?php echo $json; ?>;
+            //javascript code converts json variable to js variable for the statistics pulled from database
 
-             let books = Array.from(Object.keys(Json));
+             let books = Array.from(Object.keys(Json)); //separate json variable into two arrays representing x and y axes
              let borrows = Array.from(Object.values(Json));
-             console.log(books);
+             console.log(books); //check that array variables are assigned correctly
              console.log(borrows);
 
-             function intCast(element){
+             function intCast(element){ // cast array variables to integers
                 element = Number(element);
              }
              borrows.forEach(intCast);
              console.log(borrows);
-             console.log(typeof borrows);
+             console.log(typeof borrows);//check that the casting worked for the arrays
              </script>
         
 
@@ -91,10 +96,10 @@
             <h3>Statistics</h3>
             <div class="minorDiv"> <!-- using chart.js for the statistics -->
                 
-                   
+            <!--the following section is written mostly in chart.js, creating the bar graph for the library page-->
             <canvas id="mylibraryChart" style="width:100%;max-width:800px;text-align:center"></canvas>
             
-            <script> //this is just using static data, still need to set up with json
+            <script>
             const barColors = ["red", "green","blue","orange","brown"];
 
             const chart = new Chart("mylibraryChart", {
@@ -123,6 +128,7 @@
             </div>
         </div>
 
+        <!--Google Search API search container and button that is linked to the search.js file -->
         <div class="majorDiv">
             <h3>Google Books Search</h3>
             <div class="search-bar">

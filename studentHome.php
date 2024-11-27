@@ -1,4 +1,4 @@
-<?php
+<?php //php code for session management and connecting to database
     include 'db.php';
     session_start();
      
@@ -42,8 +42,10 @@
         </div>
     </div>
     <div class="bodyDiv">
+        <!--display welcome message to the logged in user-->
         <h1 id="welcome">Welcome <?php echo $studentName ?> </h1>
         <div class="majorDiv">
+            <!--pull the student's university information-->
             <h3>University Information</h3>
             <div class="indent">
                 <p>Student Name: <?php echo $studentName ?></p>
@@ -52,6 +54,7 @@
             </div>
         </div>
         <div class="majorDiv">
+            <!--list the library memberships that the student has-->
         <h3>My Library Memberships</h3>
             <div class="minorDiv">
                 <table>

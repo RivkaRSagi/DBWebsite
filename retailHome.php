@@ -1,4 +1,4 @@
-<?php
+<?php //php code for session handling and CRUD operations on retail home page
 include 'db.php';
 include 'queries.php';
 session_start();
@@ -76,6 +76,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
         </div>
     </div>
     <div class="bodyDiv">
+        <!--welcome message to logged in user-->
         <h1 id="welcome">Welcome <?php echo $_SESSION['storename'] .", <br>". $_SESSION['storeaddress']." location"?> </h1>
         <div class="majorDiv">
             <h3>Item Stock</h3>
@@ -87,6 +88,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
                         <th>Price</th>
                         <th>Quantity</th>
                     </tr>
+                    <!--pull textbook stock from database and display to page-->
                     <?php  
                         $storeName = $_SESSION['storename'];
                         $sql = "SELECT Title, re.ISBN, UnitPrice, Quantity
@@ -106,6 +108,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
                 </table>
             </div>
         </div>
+        <!--CRUD operations and their js/html forms start here-->
         <div class="majorDiv">
             <h3>Update Stock</h3>
             <div class="minorDiv">
@@ -212,6 +215,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
         </div>
     </div>
 
+    <!--javascript for handling the CRUD forms-->
     <script>
         //for opening and closing the CRUD forms
         function allowInput(inputType){

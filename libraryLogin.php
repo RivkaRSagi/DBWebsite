@@ -1,6 +1,9 @@
+<!--this is the login page for library admin users-->
 <?php
 include 'db.php';
 session_start();
+
+//check login credentials, if valid save them to the session variables and redirect to library home page
 
 if($_SERVER['REQUEST_METHOD']==='POST'){
     $library = $_POST['libraryname'];

@@ -1,16 +1,11 @@
-<?php
-//Configure Database
+<?php //db.php, purpose is to connect to the database
+//Configure Database according to how it is saved in mySql on your computer
 $host = "localhost";
 $db = "sys2";
 $user = "root"; //global permissions given to this user for this project, can be changed in phpmyadmin
 $pass = "";
 
-//Check Connection
-// if($conn->connect_error){
-//     // die("Connection failed: " . $conn->connect_error);
-//     echo "connection failed";
-// }
-
+//error handle
 try {
     //Create connection
     $conn = new mysqli($host, $user, $pass, $db);

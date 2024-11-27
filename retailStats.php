@@ -1,6 +1,7 @@
 <?php
 include 'db.php';
-//include 'exportData.php';
+//we could not get the export functionality working in time, more details on this are included in the report
+//include 'exportData.php'; 
 include 'queries.php';
 session_start();
 $storeName = $_SESSION['storename'];
@@ -13,6 +14,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
     }
 }
 
+//here is the attempted code to export the sales
 if (isset($_POST['exportsales'])) {    
     $query = "SELECT * FROM ItemSales where StoreName = '$storeName'";
     $result = $conn->query($query);
@@ -35,6 +37,7 @@ if (isset($_POST['exportsales'])) {
     <meta charset="utf-8">
     <title>Retail Home</title>
     <link rel="stylesheet" href="index.css">
+    <!--import the chartJS library for the stats section-->
     <script src ="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 
 </head>
@@ -65,6 +68,7 @@ if (isset($_POST['exportsales'])) {
                     <th>Quantity</th>
                     <th>SaleID</th>
                 </tr>
+                <!--while loop to pull the sales for the currently logged in retail user and display on page-->
                 <?php  
                         $sql = "SELECT ISBN, Quantity, SaleID
                          FROM itemsales  WHERE StoreName = '$storeName'";
@@ -80,8 +84,6 @@ if (isset($_POST['exportsales'])) {
                             echo "0 results";
                         }
                        
-                        //$retreival->close();
-                       
                     ?>
             </table>
         </div>         
@@ -90,29 +92,33 @@ if (isset($_POST['exportsales'])) {
     
 
     <?php 
+            // encodes the sql data to json and then adds the keys and values to a javascript array for graphing the statistics 
             $json =  RetailDemand($conn);
-            //$conn->close();
         ?>
             <script>var Json = <?php echo $json; ?>;
+            //javascript code converts json variable to js variable for the statistics pulled from database
 
-             let books = Array.from(Object.keys(Json));
+             let books = Array.from(Object.keys(Json));//separate json variable into two arrays representing x and y axes
              let buys = Array.from(Object.values(Json));
-             console.log(books);
+             console.log(books);//check that array variables are assigned correctly
              console.log(buys);
 
-             function intCast(element){
+             function intCast(element){// cast array variables to integers
                 element = Number(element);
              }
-             buys.forEach(intCast);
+             buys.forEach(intCast);//check that the casting worked for the arrays
              console.log(buys);
              </script>
 
     <div class="majorDiv">
         <h3>Statistics</h3>
         <div class="minorDiv">
+        <!-- using chart.js for the statistics -->
+
+        <!--the following section is written mostly in chart.js, creating the bar graph for the library page-->
         <canvas id="mylibraryChart" style="width:100%;max-width:800px;text-align:center"></canvas>
             
-            <script> //this is just using static data, still need to set up with json
+            <script> 
             const barColors = ["red", "green","blue","orange","brown"];
 
             const chart = new Chart("mylibraryChart", {
