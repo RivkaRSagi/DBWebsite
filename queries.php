@@ -3,7 +3,7 @@ include 'db.php';
 include 'exportData.php';
 
 // views
-// 1. todo: reform and allow parameters somehow
+// 1. Returns all textbook options, both buying and renting, new and used 
 function AllOptions($conn, $ISBN) {
     $query = sprintf("SELECT * FROM AllOptions WHERE ISBN = %u", $ISBN);
     $result = $conn->query($query);
@@ -27,7 +27,7 @@ function AllOptions($conn, $ISBN) {
     }
 }
 
- // 2. also reform to make parameters
+ // 2. select all buying options for a specific textbook and filtering by price 
  function StudentPrices($conn, $ISBN, $cost) {
   $query = sprintf("SELECT * FROM StudentPrices WHERE ISBN = %u AND BookStorePrice < %u AND RetailPrice < %u AND PrivateSellerPrice < %u",
    $ISBN, $cost, $cost, $cost);
@@ -47,7 +47,7 @@ function AllOptions($conn, $ISBN) {
   }
 }
 
- // 3
+ // 3. Returns all required textbooks for a student
  function TextbooksRequired($conn){
     $query = "SELECT * FROM TextbooksRequired;";
     $result = $conn->query($query);
@@ -62,7 +62,7 @@ function AllOptions($conn, $ISBN) {
       }
  }
 
- // 4
+ // 4. return all purchasing options from all retail locations joining their stores and stock 
  function BuyingOptions($conn){
   $query = "SELECT * FROM BuyingOptions;";
   $result = $conn->query($query);
@@ -81,7 +81,7 @@ function AllOptions($conn, $ISBN) {
     }
 }
 
-//    
+// 5. return all books from school bookstores, both new and used
 function SchoolBookStoreOptions($conn){
   $query = "SELECT * FROM schoolbookstoreoptions;";
   $result = $conn->query($query);
@@ -99,7 +99,7 @@ function SchoolBookStoreOptions($conn){
     }
 }
 
- // 7
+ // 7. finds the cheapest textbook available for each ISBN 
 function CheapestTextbooks($conn) {
   $query = sprintf("SELECT * FROM CheapestTextbooks");
   $result = $conn->query($query);
@@ -116,7 +116,7 @@ function CheapestTextbooks($conn) {
   }
 }
 
- // 8
+ // 8. returns all library books from libraries the student is a member of
  function LibraryOptions($conn, $studentID){
   $query = sprintf("SELECT * FROM LibraryOptions WHERE StudentID = %u;", $studentID);
   $result = $conn->query($query);
@@ -135,7 +135,7 @@ function CheapestTextbooks($conn) {
     }
 }
 
-// 9
+// 9 srudents can view all availale options for buying including schoolbookstore, retail and private sellers 
 function PurchaseOptions($conn) {
   $query = sprintf("SELECT * FROM PurchaseOptions");
   $result = $conn->query($query);
@@ -153,7 +153,7 @@ function PurchaseOptions($conn) {
   }
 }
 
-//10
+//10 all available options for renting including books and the schoolbookstore 
 function AvailableRentals($conn) {
   $query = sprintf("SELECT * FROM AvailableRentals");
   $result = $conn->query($query);
@@ -175,7 +175,8 @@ function AvailableRentals($conn) {
 
 
 // statistics
-function BorrowDemand($conn) {
+
+function BorrowDemand($conn) { // Returns the number of times each book in the library was borrowed 
   // put data in asociative php array and export to json
   $query = "SELECT * FROM BorrowDemand";
   $result = $conn->query($query);
@@ -189,12 +190,12 @@ function BorrowDemand($conn) {
     $json = exportToJSON($data);
     return $json;
   } else {
-    echo "no results"; // error here instead
+    echo "no results"; 
   }
 
 }
 
-function RetailDemand($conn){
+function RetailDemand($conn){ // Returns the number of times each book was purchased from a specific retail location 
   // put data in asociative php array and export to json
   $query = "SELECT * FROM RetailDemand";
   $result = $conn->query($query);
@@ -208,13 +209,13 @@ function RetailDemand($conn){
     $json = exportToJSON($data);
     return $json;
   } else {
-    echo "no results"; // error here instead
+    echo "no results"; 
   }
 }
 
 // misc
 
-// add textbook
+// add textbook to the retail stock of a store
 function AddItem($conn, $ISBN, $price, $quantity, $storeName) {
   $sqlCreate = "INSERT INTO RetailStock (ISBN, UnitPrice, Quantity, StoreName)
         VALUES ($ISBN, $price, $quantity, '$storeName')";

@@ -12,7 +12,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
         header("Location: login.html");
         exit;
     }
-    else if(isset($_POST['addItem'])){ //STILL NEEDS ERROR HANDLING
+    else if(isset($_POST['addItem'])){ // Add a textbook to the retail stock 
         echo "adding an item";
         $ISBN = $_POST['ISBN'];
         $price = $_POST['price'];
@@ -21,7 +21,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
         AddItem($conn, $ISBN, $price, $quantity, $storeName);
 
     }
-    else if(isset($_POST['removeItem'])){ //STILL NEEDS ERROR HANDLING
+    else if(isset($_POST['removeItem'])){ // Remove a textbook from the retail stock 
         echo "removing an item";
         $ISBN = $_POST['ISBN'];
 
@@ -34,7 +34,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
             echo "ERROR: ".$sqlDelete."<br>". $conn->error;
         }
     }
-    else if(isset($_POST['updateItem'])){
+    else if(isset($_POST['updateItem'])){ // update the quantity in the retail stock
         echo "updating an item";
         $ISBN = $_POST['ISBN'];
         $quantity = $_POST['quantity'];
