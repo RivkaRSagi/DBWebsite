@@ -1,3 +1,4 @@
+<!-- php code for the filter functionality in textbook page -->
 <?php
 include 'db.php';
 session_start();
@@ -5,7 +6,7 @@ $studentID = $_SESSION['StudentID'];
 
 $query = isset($_GET['query']) ? $_GET['query'] : '';
 $filterOption = isset($_GET['filter']) ? $_GET['filter'] : 'default';
-
+// sql view that finds all retail prices based on student ID nd courses student is enrolled in
 $sqlRetail = "SELECT DISTINCT 
         c.CourseName,
         c.CourseID,
@@ -22,6 +23,7 @@ $sqlRetail = "SELECT DISTINCT
     WHERE sc.StudentID = '$studentID' 
     AND rs.UnitPrice IS NOT NULL
 ";
+// sql view that finds all new bookstore books based on student ID and courses student is enrolled in
 $sqlBookstoreNew = "
     SELECT DISTINCT 
         c.CourseName,
@@ -39,6 +41,7 @@ $sqlBookstoreNew = "
     WHERE sc.StudentID = '$studentID' 
     AND sbn.UnitPrice IS NOT NULL
 ";
+//sql view that finds all used bookstore books based on student ID and courses student is enrolled in
 $sqlBookstoreUsed = "
     SELECT DISTINCT 
         c.CourseName,
@@ -56,6 +59,7 @@ $sqlBookstoreUsed = "
     WHERE sc.StudentID = '$studentID' 
     AND sbu.UnitPrice IS NOT NULL
 ";
+//sql view that find all library books based in student ID and courses student is enrolled in
 $sqlLibraryBooks = "
     SELECT DISTINCT 
         c.CourseName,
@@ -73,50 +77,60 @@ $sqlLibraryBooks = "
     WHERE sc.StudentID = '$studentID' 
     AND lb.BorrowStatus IS NOT NULL
 ";
+//switch statement for filtering views
 switch ($filterOption) {
+    //displays all retail and bookstore books that are less than $100
     case 'under100':
         $sqlRetail .= " AND rs.UnitPrice < 100";
         $sqlBookstoreNew .= " AND sbn.UnitPrice < 100";
         $sqlBookstoreUsed .= " AND sbu.UnitPrice < 100";
         break;
+    //orders prices from low to high - the lowtohigh function is instantiated below 
     case 'lowtohigh':
         break;
+    //displays all buying options only
     case 'buying':
         $sqlRetail .= " AND rs.ISBN IS NOT NULL";
         $sqlBookstoreNew .= " AND sbn.ISBN IS NOT NULL";
         $sqlBookstoreUsed .= " AND sbu.ISBN IS NOT NULL";
         $sqlLibraryBooks .= " AND lb.ISBN IS NULL";
         break;
+    //displays all renting options only 
     case 'renting':
         $sqlLibraryBooks .= " AND lb.ISBN IS NOT NULL";
         $sqlRetail .= " AND rs.ISBN IS NULL";
         $sqlBookstoreNew .= " AND sbn.ISBN IS NULL";
         $sqlBookstoreUsed .= " AND sbu.ISBN IS NULL";
         break;
+    //displays only retail options
     case 'retail':
         $sqlRetail .= " AND rs.ISBN IS NOT NULL";
         $sqlBookstoreNew .= " AND sbn.ISBN IS NULL";
         $sqlBookstoreUsed .= " AND sbu.ISBN IS NULL";
         $sqlLibraryBooks .= " AND lb.ISBN IS NULL";
         break;
+    //displays only library options
     case 'library':
         $sqlLibraryBooks .= " AND lb.ISBN IS NOT NULL";
         $sqlRetail .= " AND rs.ISBN IS NULL";
         $sqlBookstoreNew .= " AND sbn.ISBN IS NULL";
         $sqlBookstoreUsed .= " AND sbu.ISBN IS NULL";
         break;
+    //displays only school bookstore options
     case 'schoolbookstore':
         $sqlBookstoreNew .= " AND sbn.ISBN IS NOT NULL";
         $sqlBookstoreUsed .= " AND sbu.ISBN IS NOT NULL";
         $sqlLibraryBooks .= " AND lb.ISBN IS NULL";
         $sqlRetail .= " AND rs.ISBN IS NULL";
         break;
+    //all option that displays all buying and renting option for everu course student is enrolled in (master list)
     case 'all':
         break;
     default:
         break;
 }
 
+// connects the view results to the table for the all option (master list)
 $resultRetail = $conn->query($sqlRetail);
 $resultBookstoreNew = $conn->query($sqlBookstoreNew);
 $resultBookstoreUsed = $conn->query($sqlBookstoreUsed);
@@ -147,7 +161,7 @@ if ($resultLibraryBooks->num_rows > 0) {
         $results[] = $row;
     }
 }
-
+//function for sorting prices from low to high
 if ($filterOption == 'lowtohigh') {
     usort($results, function($a, $b) {
         $priceA = ($a['Type'] == 'Library') ? $a['Price'] : $a['Price'];
@@ -155,7 +169,7 @@ if ($filterOption == 'lowtohigh') {
         return $priceA - $priceB;
     });
 }
-
+//creates the table coloumn and pushes filter results
 if (count($results) > 0) {
     echo "<table border='1'>
             <tr>

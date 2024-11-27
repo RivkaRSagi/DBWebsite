@@ -1,8 +1,11 @@
+//main function that integrates the Google search API with the website
 function searchBooks() {
+    //gets query value from the search bar in library page
     const query = document.getElementById("query").value;
+    //search API link
     const url = `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=10`;
 
-    // Fetch data from Google Books API
+    //based on query value fetches data from Google Books API
     fetch(url)
         .then(response => response.json())
         .then(data => {
@@ -17,6 +20,7 @@ function displayBooks(books) {
     const bookResults = document.getElementById("book-results");
     bookResults.innerHTML = ''; // Clear previous results
 
+    //creates a bookcard that hold information of book from query
     if (books && books.length > 0) {
         books.forEach(book => {
             const bookInfo = book.volumeInfo;
@@ -25,7 +29,7 @@ function displayBooks(books) {
 
             // Get book image or use placeholder
             const bookImage = bookInfo.imageLinks ? bookInfo.imageLinks.thumbnail : 'https://via.placeholder.com/150';
-            
+            //displays book image, title, author, publisher, published date and ISBN in the bookcard
             bookCard.innerHTML = `
                 <img src="${bookImage}" alt="${bookInfo.title}">
                 <h3>${bookInfo.title}</h3>

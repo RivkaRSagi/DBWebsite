@@ -1,8 +1,10 @@
+<!-- php file for the search bar in the textbooks page -->
 <?php
 include 'db.php';
-
+//gets the query request from the search bar
 $query = isset($_GET['query']) ? $_GET['query'] : '';
 $query = mysqli_real_escape_string($conn, $query);
+//sql view that displays the course name, ID, Textbook Name, ISBN, Price , Type and Location of the search query (which is a course name)
 $sql = "SELECT DISTINCT 
         c.CourseName, 
         c.CourseID, 
@@ -65,6 +67,8 @@ $sql = "SELECT DISTINCT
     LEFT JOIN Library l ON lb.LibraryName = l.LibraryName
     WHERE (c.CourseName LIKE '%$query%' OR c.CourseID LIKE '%$query%') AND lb.BorrowStatus IS NOT NULL
 ";
+//connects the view results to a table and changes the table coloumn names from the default ones
+//also displays the borrow status instead of the price for library books
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     echo "<table>";

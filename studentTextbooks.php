@@ -25,11 +25,13 @@
     <div class="bodyDiv">
         <div class="majorDiv">
             <h3>Textbooks</h3>
+            <!-- created a search bar container-->
             <div class="minorDiv">
                 <div class="searchtextbook">
                     <input type="text" id="query" placeholder="Enter Course Name or Course ID">
                     <button id="searchBtn">Search</button>
                 </div>
+            <!-- created a drop down with all filter functionalities -->
                 <div class="filterDiv">
                     <select id="filterDropdown">
                         <option value="default">Default</option>
@@ -43,6 +45,7 @@
                         <option value="library">Library Options Only</option>
                     </select>
                 </div>
+            <!-- created a default table that initially displays all courses student is enrolled in along with its textbook with a working php code-->
                 <div class="tableResults" id="tableResults">
                     <table>
                         <tr>
@@ -54,6 +57,7 @@
                      <?php
                         include 'db.php';
                         session_start();
+                        //gets sql view from the database based on the student's ID
                         $studentID = $_SESSION['StudentID'];
         
                         $sql = "SELECT 
@@ -69,6 +73,7 @@
                         ";
                         $result = $conn->query($sql);
 
+                        //adds view results to the table 
                         if ($result->num_rows > 0) {
                             while($row = $result->fetch_assoc()) {
                                 echo "<tr>
@@ -91,6 +96,7 @@
         </div>
     </div>
 
+    <!-- javascript for both the search and filter functions that uses AJAX requests and calls upon searchprices.php and filterprices.php -->
     <script>
         $("#searchBtn").on("click", function(){
             var query = $("#query").val();
