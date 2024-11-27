@@ -66,8 +66,10 @@
         </div>
 
 
+        
         <?php 
-            $json =  BorrowDemand($conn);
+                        // encodes the sql data to json and then adds the keys and values to a javascript array for graphing the statistics 
+                        $json =  BorrowDemand($conn);
         ?>
             <script>var Json = <?php echo $json; ?>;
 

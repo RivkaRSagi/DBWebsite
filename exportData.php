@@ -1,8 +1,10 @@
 <?php
 
-//Export to JSON
+//Export php associative arrays to JSON
 function exportToJSON($data)
 {
+    // kevin's code which was not used
+
     //header('Content-Type: application/json');
 
     //echo json_encode($data);
@@ -12,19 +14,20 @@ function exportToJSON($data)
     //file_put_contents($file, json_encode($data));
 
     //echo "Data has been exported to $file";
+
     return json_encode($data);
 }
 
-//Export to CSV
+//Export php associative arrays to CSV
 function exportToCSV( $data, $fileName)
 {
-    //Path
+    //file path 
     $file = $fileName . ".csv";
 
     //Open file to output stream
     $fp = fopen($file, 'w');
 
-    //Write Data
+    //Write each data row 
     foreach ($data as $row)
     {
         fputcsv($fp, $row);
@@ -35,6 +38,7 @@ function exportToCSV( $data, $fileName)
     fclose($fp);
     echo $data;
 
+    // download file 
     //header('Content-Description: File Transfer');
 header('Content-Disposition: attachment; filename='.basename($file));
 header('Expires: 0');
